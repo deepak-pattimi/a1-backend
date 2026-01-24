@@ -6,6 +6,13 @@
 <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
 <script src="{{ asset('plugins/lazy/jquery.lazy.min.js') }}"></script>
 <script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+
+<!-- DataTables JS -->
+<script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.min.js"></script>
+
 @livewireScripts
 <script src="{{asset('dist/js/livewire.js')}}"></script>
 

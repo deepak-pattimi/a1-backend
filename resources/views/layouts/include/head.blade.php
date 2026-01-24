@@ -23,8 +23,9 @@
 <link rel="stylesheet" href="{{ asset('plugins/toaster/toastr.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/select2/dist/css/select2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('dist/css/style.css') }}">
+<!-- DataTables CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap4.min.css">
 <!-- Stack array for including inline css or head elements -->
 <meta name="csrf-token" id="csrf-token" content="{{ csrf_token() }}">
 @stack('head')
-
-

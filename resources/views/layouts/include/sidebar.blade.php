@@ -98,6 +98,10 @@
                     <a href="{{url('admin/seo')}}"><i class="ik ik-code"></i><span>SEO Sections</span> </a>
                 </div> -->
 
+                <div class="nav-item {{ ($segment2 == 'appointments') ? 'active' : '' }}">
+                    <a href="{{url('admin/appointments')}}"><i class="ik ik-calendar"></i><span>Appointments</span> </a>
+                </div>
+
                 <div class="nav-item {{ ($segment2 == 'contact') ? 'active' : '' }}">
                     <a href="{{url('admin/contact')}}"><i class="ik ik-phone"></i><span>Contact</span> </a>
                 </div>

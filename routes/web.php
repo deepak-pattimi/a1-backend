@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\SeoController;
 use App\Http\Controllers\Admin\DynamicCrudController;
+use App\Http\Controllers\Admin\AppointmentController;
 
 Route::get('/', [LoginController::class, 'showLoginForm'])->name('admin.login');
 
@@ -95,9 +96,10 @@ Route::group(['prefix' => 'admin'], function () {
         // Change any record status
         Route::get('change-status/{tableName}/{id}', [GeneralController::class, 'changeStatus'])->name('change-status');
 
-
-        // Get Permissions
-        Route::get('get-role-permissions-badge', [PermissionController::class, 'getPermissionBadgeByRole']);
+        // Appointments routes
+        Route::resource('appointments', AppointmentController::class);
+        Route::post('appointments/{id}/update-status', [AppointmentController::class, 'updateStatus'])->name('appointments.update-status');
+        Route::post('appointments/{id}/update-payment-status', [AppointmentController::class, 'updatePaymentStatus'])->name('appointments.update-payment-status');
 
         // Dynamic pages
         Route::resource('pages', PageController::class);
@@ -117,19 +119,3 @@ Route::group(['prefix' => 'admin'], function () {
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

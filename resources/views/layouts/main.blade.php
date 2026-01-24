@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <title>@yield('title', '') | Prashanth CMS-Admin</title>
+    <title>@yield('title', '') | A1 Laparoscopy Hospital CMS-Admin</title>
     <!-- initiate head with meta tags, css and script -->
     @include('layouts.include.head')
 </head>
