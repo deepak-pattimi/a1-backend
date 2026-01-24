@@ -3,6 +3,11 @@
 @section('title', 'Appointment Details')
 
 @section('content')
+<!-- push external head elements to head -->
+@push('head')
+<meta name="csrf-token" id="csrf-token" content="{{ csrf_token() }}" />
+@endpush
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
@@ -97,7 +102,7 @@
                     <div class="row mt-3">
                         <div class="col-md-12">
                             <h4>Update Status</h4>
-                            <form id="status-update-form">
+                            <form id="status-update-form" method="POST">
                                 @csrf
                                 <div class="form-row">
                                     <div class="col-md-4">
@@ -141,8 +146,15 @@
 @push('scripts')
 <script>
 $(document).ready(function() {
+    // Ensure the CSRF token is set for all AJAX requests
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
     $('#status-update-form').on('submit', function(e) {
-        e.preventDefault();
+        e.preventDefault();  // This is crucial to prevent the default form submission
         
         var formData = {
             status: $('#status').val(),
@@ -150,20 +162,26 @@ $(document).ready(function() {
             _token: $('meta[name="csrf-token"]').attr('content')
         };
         
+        // Disable submit button to prevent multiple submissions
+        $('button[type="submit"]').prop('disabled', true).text('Updating...');
+        
         $.ajax({
             url: '{{ route('appointments.update-status', $appointment->id) }}',
             type: 'POST',
             data: formData,
             success: function(response) {
                 toastr.success(response.message);
-                // Reload the page to show updated values
+                // Reload the page after a short delay to show updated values
                 setTimeout(function() {
                     location.reload();
-                }, 1000);
+                }, 1500);
             },
             error: function(xhr) {
-                console.log(xhr.responseText);
-                toastr.error('Error updating status');
+                console.log('Error:', xhr.responseText);
+                toastr.error('Error updating appointment status');
+                
+                // Re-enable the button
+                $('button[type="submit"]').prop('disabled', false).text('Update');
             }
         });
     });
