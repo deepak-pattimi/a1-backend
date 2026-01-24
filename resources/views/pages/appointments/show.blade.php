@@ -89,7 +89,7 @@
                                 </tr>
                                 <tr>
                                     <td><strong>Amount:</strong></td>
-                                    <td>€{{ number_format($appointment->amount, 2) }}</td>
+                                    <td>₹{{ number_format($appointment->amount, 2) }}</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Transaction ID:</strong></td>
@@ -130,7 +130,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>&nbsp;</label><br>
-                                            <button type="submit" class="btn btn-primary">Update</button>
+                                            <button type="submit" class="btn btn-primary" id="update-btn">Update</button>
                                         </div>
                                     </div>
                                 </div>
@@ -146,7 +146,10 @@
 
 @push('scripts')
 <script>
+console.log('Script loaded, waiting for document ready');
 $(document).ready(function() {
+    console.log('Document ready fired');
+    
     // Ensure the CSRF token is set for all AJAX requests
     $.ajaxSetup({
         headers: {
@@ -154,49 +157,71 @@ $(document).ready(function() {
         }
     });
 
-    // More robust form submission handler with error checking
+    // Attach event listener with more debugging
     $('#status-update-form').on('submit', function(e) {
-        // Prevent default form submission
+        console.log('Form submit event fired');
         e.preventDefault();
         
-        // Check if the event was actually prevented
-        console.log('Form submission intercepted');
+        // Get the values
+        var statusVal = $('#status').val();
+        var paymentStatusVal = $('#payment_status').val();
+        console.log('Status:', statusVal, 'Payment Status:', paymentStatusVal);
         
         var formData = {
-            status: $('#status').val(),
-            payment_status: $('#payment_status').val(),
+            status: statusVal,
+            payment_status: paymentStatusVal,
             _token: $('meta[name="csrf-token"]').attr('content')
         };
         
-        // Disable submit button to prevent multiple submissions
-        $('button[type="submit"]').prop('disabled', true).text('Updating...');
+        console.log('Form Data:', formData);
         
+        // Disable submit button to prevent multiple submissions
+        $('#update-btn').prop('disabled', true).text('Updating...');
+        
+        // Make the AJAX request
         $.ajax({
             url: '{{ route('appointments.update-status', $appointment->id) }}',
             type: 'POST',
             data: formData,
             success: function(response) {
-                console.log('Success:', response);
-                toastr.success(response.message);
+                console.log('AJAX Success:', response);
+                if(typeof toastr !== 'undefined') {
+                    toastr.success(response.message);
+                } else {
+                    alert(response.message);
+                }
+                
                 // Reload the page after a short delay to show updated values
                 setTimeout(function() {
                     location.reload();
                 }, 1500);
             },
             error: function(xhr, status, error) {
-                console.log('Error:', xhr.responseText);
-                console.log('Status:', status);
-                console.log('Error:', error);
-                toastr.error('Error updating appointment status');
+                console.log('AJAX Error:', xhr, status, error);
+                console.log('Response Text:', xhr.responseText);
+                
+                var errorMsg = 'Error updating appointment status';
+                if(typeof toastr !== 'undefined') {
+                    toastr.error(errorMsg);
+                } else {
+                    alert(errorMsg);
+                }
                 
                 // Re-enable the button
-                $('button[type="submit"]').prop('disabled', false).text('Update');
+                $('#update-btn').prop('disabled', false).text('Update');
             }
         });
     });
     
-    // Additional debug logging
-    console.log('Appointment update script loaded');
+    // Test that jQuery is working
+    console.log('Event handler attached to form');
+    
+    // Check if the form element exists
+    if ($('#status-update-form').length > 0) {
+        console.log('Form element found');
+    } else {
+        console.log('Form element NOT found');
+    }
 });
 </script>
 @endpush
