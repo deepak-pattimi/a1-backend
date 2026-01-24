@@ -75,7 +75,7 @@ class AppointmentController extends Controller
                 ->addColumn('actions', function($appointment) {
                     $actions = '<div class="action-buttons">';
                     
-                    $actions .= '<a href="' . route('appointments.show', $appointment->id) . '" class="btn btn-sm btn-info mr-1">View</a>';
+                    $actions .= '<a href="' . route('admin.appointments.show', $appointment->id) . '" class="btn btn-sm btn-info mr-1">View</a>';
                     $actions .= '<button class="btn btn-sm btn-warning mr-1 update-status-btn" data-id="' . $appointment->id . '" data-status="' . $appointment->status . '">Update Status</button>';
                     $actions .= '<button class="btn btn-sm btn-primary update-payment-status-btn" data-id="' . $appointment->id . '" data-payment-status="' . $appointment->payment_status . '">Update Payment</button>';
                     
