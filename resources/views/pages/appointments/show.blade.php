@@ -97,7 +97,7 @@
                     <div class="row mt-3">
                         <div class="col-md-12">
                             <h4>Update Status</h4>
-                            <form method="POST" action="{{ route('appointments.update-status', $appointment->id) }}">
+                            <form id="status-update-form">
                                 @csrf
                                 <div class="form-row">
                                     <div class="col-md-4">
@@ -137,3 +137,36 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+$(document).ready(function() {
+    $('#status-update-form').on('submit', function(e) {
+        e.preventDefault();
+        
+        var formData = {
+            status: $('#status').val(),
+            payment_status: $('#payment_status').val(),
+            _token: $('meta[name="csrf-token"]').attr('content')
+        };
+        
+        $.ajax({
+            url: '{{ route('appointments.update-status', $appointment->id) }}',
+            type: 'POST',
+            data: formData,
+            success: function(response) {
+                toastr.success(response.message);
+                // Reload the page to show updated values
+                setTimeout(function() {
+                    location.reload();
+                }, 1000);
+            },
+            error: function(xhr) {
+                console.log(xhr.responseText);
+                toastr.error('Error updating status');
+            }
+        });
+    });
+});
+</script>
+@endpush

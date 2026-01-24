@@ -199,7 +199,7 @@
                     data: "amount", 
                     name: "amount",
                     render: function(data, type, row) {
-                        return '€' + parseFloat(data || 0).toFixed(2);
+                        return '₹' + parseFloat(data || 0).toFixed(2);
                     }
                 },
                 {

@@ -75,18 +75,19 @@ class AppointmentController extends Controller
     public function updateStatus(Request $request, $id)
     {
         $appointment = Appointment::findOrFail($id);
-        $appointment->status = $request->status;
+        
+        // Update status if provided
+        if ($request->has('status')) {
+            $appointment->status = $request->status;
+        }
+        
+        // Update payment status if provided
+        if ($request->has('payment_status')) {
+            $appointment->payment_status = $request->payment_status;
+        }
+        
         $appointment->save();
 
         return response()->json(['message' => 'Appointment status updated successfully!']);
-    }
-
-    public function updatePaymentStatus(Request $request, $id)
-    {
-        $appointment = Appointment::findOrFail($id);
-        $appointment->payment_status = $request->payment_status;
-        $appointment->save();
-
-        return response()->json(['message' => 'Payment status updated successfully!']);
     }
 }
