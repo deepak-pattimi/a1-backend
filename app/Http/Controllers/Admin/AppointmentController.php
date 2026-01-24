@@ -12,30 +12,10 @@ class AppointmentController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $appointments = Appointment::select('*');
-            
-            // Apply filters if present
-            if (!empty($request->fullname)) {
-                $appointments->where('fullname', 'like', '%' . $request->fullname . '%');
-            }
-            
-            if (!empty($request->email)) {
-                $appointments->where('email', 'like', '%' . $request->email . '%');
-            }
-            
-            if (!empty($request->mobile)) {
-                $appointments->where('mobile', 'like', '%' . $request->mobile . '%');
-            }
-            
-            if (!empty($request->status)) {
-                $appointments->where('status', $request->status);
-            }
-            
-            if (!empty($request->payment_status)) {
-                $appointments->where('payment_status', $request->payment_status);
-            }
-            
-            return DataTables::of($appointments)
+            $data = Appointment::latest()->get();
+
+            return Datatables::of($data)
+                ->addIndexColumn()
                 ->addColumn('appointment_details', function($appointment) {
                     return $appointment->selected_date ? $appointment->selected_date->format('d M Y') . ' at ' . $appointment->selected_time : 'N/A';
                 })
@@ -72,18 +52,14 @@ class AppointmentController extends Controller
                     }
                     return '<span class="' . $badgeClass . '">' . ucfirst($appointment->payment_status ?? 'N/A') . '</span>';
                 })
-                ->addColumn('actions', function($appointment) {
-                    $actions = '<div class="action-buttons">';
-                    
-                    $actions .= '<a href="' . route('appointments.show', $appointment->id) . '" class="btn btn-sm btn-info mr-1">View</a>';
-                    $actions .= '<button class="btn btn-sm btn-warning mr-1 update-status-btn" data-id="' . $appointment->id . '" data-status="' . ($appointment->status ?? '') . '">Update Status</button>';
-                    $actions .= '<button class="btn btn-sm btn-primary update-payment-status-btn" data-id="' . $appointment->id . '" data-payment-status="' . ($appointment->payment_status ?? '') . '">Update Payment</button>';
-                    
-                    $actions .= '</div>';
-                    
-                    return $actions;
+                ->addColumn('action', function($appointment) {
+                    $btn = '<a href="'.route('appointments.show', $appointment->id).'" data-toggle="tooltip"  data-id="' . $appointment->id . '" data-original-title="View" class="view btn btn-info btn-sm viewAppointment"><i class="fa fa-eye"></i></a>';
+
+                    $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $appointment->id . '" data-status="'.$appointment->status.'" data-original-title="Edit" class="edit btn btn-warning btn-sm updateStatus"><i class="fa fa-edit"></i></a>';
+
+                    return $btn;
                 })
-                ->rawColumns(['status_badge', 'payment_status_badge', 'actions'])
+                ->rawColumns(['status_badge', 'payment_status_badge', 'action'])
                 ->make(true);
         }
         

@@ -50,6 +50,15 @@
                     </div>
                 </div>
 
+                       <div class="nav-item {{ ($segment2 == 'appointments') ? 'active' : '' }}">
+                    <a href="{{url('admin/appointments')}}"><i class="ik ik-calendar"></i><span>Appointments</span> </a>
+                </div>
+
+                <div class="nav-item {{ ($segment2 == 'contact') ? 'active' : '' }}">
+                    <a href="{{url('admin/contact')}}"><i class="ik ik-phone"></i><span>Contact Requests</span> </a>
+                </div>
+
+
                 <!-- home page -->
                 <div class="nav-item {{ ($segment2 == 'banners') ? 'active' : '' }}">
                     <a href="{{url('admin/banners')}}"><i class="ik ik-image"></i><span>Banners</span> </a>
@@ -98,13 +107,7 @@
                     <a href="{{url('admin/seo')}}"><i class="ik ik-code"></i><span>SEO Sections</span> </a>
                 </div> -->
 
-                <div class="nav-item {{ ($segment2 == 'appointments') ? 'active' : '' }}">
-                    <a href="{{url('admin/appointments')}}"><i class="ik ik-calendar"></i><span>Appointments</span> </a>
-                </div>
-
-                <div class="nav-item {{ ($segment2 == 'contact') ? 'active' : '' }}">
-                    <a href="{{url('admin/contact')}}"><i class="ik ik-phone"></i><span>Contact</span> </a>
-                </div>
+         
                 <!-- <div class="nav-item {{ ($segment2 == 'create-dynamic-crud') ? 'active' : '' }}">
                     <a href="{{url('admin/create-dynamic-crud')}}"><i class="ik ik-book"></i><span>Create Crud</span> </a>
                 </div> -->
