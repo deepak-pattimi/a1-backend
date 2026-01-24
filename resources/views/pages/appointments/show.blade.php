@@ -89,7 +89,7 @@
                                 </tr>
                                 <tr>
                                     <td><strong>Amount:</strong></td>
-                                    <td>€{{ number_format($appointment->amount, 2) }}</td>
+                                    <td>₹{{ number_format($appointment->amount, 2) }}</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Transaction ID:</strong></td>

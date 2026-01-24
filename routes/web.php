@@ -96,10 +96,11 @@ Route::group(['prefix' => 'admin'], function () {
         // Change any record status
         Route::get('change-status/{tableName}/{id}', [GeneralController::class, 'changeStatus'])->name('change-status');
 
-        // Appointments routes
-        Route::resource('appointments', AppointmentController::class);
+        // Appointments routes - excluding the default update method since we use custom update routes
+        Route::resource('appointments', AppointmentController::class)->except(['update']);
         Route::post('appointments/{id}/update-status', [AppointmentController::class, 'updateStatus'])->name('appointments.update-status');
-        Route::post('appointments/{id}/update-payment-status', [AppointmentController::class, 'updatePaymentStatus'])->name('appointments.update-payment-status');
+        // Note: We removed updatePaymentStatus method from the controller, so removing this route too
+        // If we need separate payment status update, we would add it back
 
         // Dynamic pages
         Route::resource('pages', PageController::class);
