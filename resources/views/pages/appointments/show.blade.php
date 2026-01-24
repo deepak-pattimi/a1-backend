@@ -89,7 +89,7 @@
                                 </tr>
                                 <tr>
                                     <td><strong>Amount:</strong></td>
-                                    <td>₹{{ number_format($appointment->amount, 2) }}</td>
+                                    <td>€{{ number_format($appointment->amount, 2) }}</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Transaction ID:</strong></td>
@@ -102,7 +102,8 @@
                     <div class="row mt-3">
                         <div class="col-md-12">
                             <h4>Update Status</h4>
-                            <form id="status-update-form" method="POST">
+                            <!-- Explicitly set the form action to ensure no conflict with the current page -->
+                            <form id="status-update-form" method="POST" action="javascript:void(0);">
                                 @csrf
                                 <div class="form-row">
                                     <div class="col-md-4">
@@ -153,8 +154,13 @@ $(document).ready(function() {
         }
     });
 
+    // More robust form submission handler with error checking
     $('#status-update-form').on('submit', function(e) {
-        e.preventDefault();  // This is crucial to prevent the default form submission
+        // Prevent default form submission
+        e.preventDefault();
+        
+        // Check if the event was actually prevented
+        console.log('Form submission intercepted');
         
         var formData = {
             status: $('#status').val(),
@@ -170,14 +176,17 @@ $(document).ready(function() {
             type: 'POST',
             data: formData,
             success: function(response) {
+                console.log('Success:', response);
                 toastr.success(response.message);
                 // Reload the page after a short delay to show updated values
                 setTimeout(function() {
                     location.reload();
                 }, 1500);
             },
-            error: function(xhr) {
+            error: function(xhr, status, error) {
                 console.log('Error:', xhr.responseText);
+                console.log('Status:', status);
+                console.log('Error:', error);
                 toastr.error('Error updating appointment status');
                 
                 // Re-enable the button
@@ -185,6 +194,9 @@ $(document).ready(function() {
             }
         });
     });
+    
+    // Additional debug logging
+    console.log('Appointment update script loaded');
 });
 </script>
 @endpush
