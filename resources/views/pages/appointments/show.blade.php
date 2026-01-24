@@ -144,7 +144,7 @@
 </div>
 @endsection
 
-@push('scripts')
+@push('script')
 <script>
 console.log('Script loaded, waiting for document ready');
 $(document).ready(function() {
