@@ -37,7 +37,7 @@ class AppointmentController extends Controller
             
             return DataTables::of($appointments)
                 ->addColumn('appointment_details', function($appointment) {
-                    return $appointment->selected_date->format('d M Y') . ' at ' . $appointment->selected_time;
+                    return $appointment->selected_date ? $appointment->selected_date->format('d M Y') . ' at ' . $appointment->selected_time : 'N/A';
                 })
                 ->addColumn('status_badge', function($appointment) {
                     $badgeClass = '';
@@ -52,7 +52,7 @@ class AppointmentController extends Controller
                             $badgeClass = 'badge badge-warning';
                             break;
                     }
-                    return '<span class="' . $badgeClass . '">' . ucfirst($appointment->status) . '</span>';
+                    return '<span class="' . $badgeClass . '">' . ucfirst($appointment->status ?? 'N/A') . '</span>';
                 })
                 ->addColumn('payment_status_badge', function($appointment) {
                     $badgeClass = '';
@@ -70,14 +70,14 @@ class AppointmentController extends Controller
                             $badgeClass = 'badge badge-warning';
                             break;
                     }
-                    return '<span class="' . $badgeClass . '">' . ucfirst($appointment->payment_status) . '</span>';
+                    return '<span class="' . $badgeClass . '">' . ucfirst($appointment->payment_status ?? 'N/A') . '</span>';
                 })
                 ->addColumn('actions', function($appointment) {
                     $actions = '<div class="action-buttons">';
                     
-                    $actions .= '<a href="' . route('admin.appointments.show', $appointment->id) . '" class="btn btn-sm btn-info mr-1">View</a>';
-                    $actions .= '<button class="btn btn-sm btn-warning mr-1 update-status-btn" data-id="' . $appointment->id . '" data-status="' . $appointment->status . '">Update Status</button>';
-                    $actions .= '<button class="btn btn-sm btn-primary update-payment-status-btn" data-id="' . $appointment->id . '" data-payment-status="' . $appointment->payment_status . '">Update Payment</button>';
+                    $actions .= '<a href="' . route('appointments.show', $appointment->id) . '" class="btn btn-sm btn-info mr-1">View</a>';
+                    $actions .= '<button class="btn btn-sm btn-warning mr-1 update-status-btn" data-id="' . $appointment->id . '" data-status="' . ($appointment->status ?? '') . '">Update Status</button>';
+                    $actions .= '<button class="btn btn-sm btn-primary update-payment-status-btn" data-id="' . $appointment->id . '" data-payment-status="' . ($appointment->payment_status ?? '') . '">Update Payment</button>';
                     
                     $actions .= '</div>';
                     

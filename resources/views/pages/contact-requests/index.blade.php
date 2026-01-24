@@ -165,7 +165,7 @@
                 { title:'No', data: "DT_RowIndex", name: "DT_RowIndex" },
                 { title:'Name', data: "fullname", name: "fullname" },
                 { title:'Email Address', data: "email", name: "email" },
-                { title:'Phone Number', data: "phone", name: "phone" },
+                { title:'Phone Number', data: "mobile", name: "mobile" },
                 { title:'Message', data: "message", name: "message" },
                 {
                     title:'Action',
