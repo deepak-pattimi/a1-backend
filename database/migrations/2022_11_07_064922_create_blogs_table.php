@@ -49,6 +49,15 @@ return new class extends Migration
             
             $table->timestamps();
         });
+
+        Schema::create('blog_likes', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('blog_id');
+            $table->string('ip_address');
+            $table->timestamps();
+            
+            $table->foreign('blog_id')->references('id')->on('blogs')->onDelete('cascade');
+        });
     }
 
     /**
@@ -58,6 +67,7 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('blog_likes');
         Schema::dropIfExists('blogs');
     }
 };

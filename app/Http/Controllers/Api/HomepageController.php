@@ -17,6 +17,7 @@ use App\Models\Page;
 
 use App\Models\Reviews;
 use App\Models\Blog;
+use App\Models\BlogLike;
 
 class HomepageController extends Controller
 {
@@ -133,11 +134,15 @@ class HomepageController extends Controller
             ->orderBy('views', 'desc')
             ->limit(5)
             ->get();
+            
+        $ip = request()->ip();
+        $is_liked = BlogLike::where('blog_id', $blog->id)->where('ip_address', $ip)->exists();
 
         return response()->json([
             'blog' => $blog,
             'related' => $related,
-            'popular' => $popular
+            'popular' => $popular,
+            'is_liked' => $is_liked
         ], 200);
     }
 
@@ -148,6 +153,18 @@ class HomepageController extends Controller
         if(!$blog){
             return response()->json(['message' => 'Blog not found'], 404);
         }
+        
+        $ip = request()->ip();
+        $existing_like = BlogLike::where('blog_id', $id)->where('ip_address', $ip)->first();
+        
+        if($existing_like){
+             return response()->json(['message' => 'You have already liked this blog', 'likes' => $blog->likes], 200);
+        }
+
+        BlogLike::create([
+            'blog_id' => $id,
+            'ip_address' => $ip
+        ]);
 
         $blog->increment('likes');
         
