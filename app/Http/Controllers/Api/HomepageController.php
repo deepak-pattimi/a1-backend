@@ -110,8 +110,8 @@ class HomepageController extends Controller
     }
 
     // get blog detail api
-    public function getBlogDetail($id){
-        $blog = Blog::find($id);
+    public function getBlogDetail($slug){
+        $blog = Blog::where('slug', $slug)->first();
         
         if(!$blog){
             return response()->json(['message' => 'Blog not found'], 404);
