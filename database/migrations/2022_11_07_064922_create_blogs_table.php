@@ -36,6 +36,15 @@ return new class extends Migration
             $table->string('canonical')->nullable();
             $table->string('og_local')->nullable();
             $table->boolean('status')->default(true);
+            
+            // New fields added
+            $table->string('category')->nullable();
+            $table->text('tags')->nullable();
+            $table->string('read_time')->nullable();
+            $table->integer('views')->default(0);
+            $table->string('author_role')->nullable();
+            $table->string('author_image')->nullable();
+            
             $table->timestamps();
         });
     }
