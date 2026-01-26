@@ -140,6 +140,22 @@ class HomepageController extends Controller
             'popular' => $popular
         ], 200);
     }
+
+    // like blog api
+    public function likeBlog($id){
+        $blog = Blog::find($id);
+        
+        if(!$blog){
+            return response()->json(['message' => 'Blog not found'], 404);
+        }
+
+        $blog->increment('likes');
+        
+        return response()->json([
+            'message' => 'Blog liked successfully',
+            'likes' => $blog->likes
+        ], 200);
+    }
     
 
 }

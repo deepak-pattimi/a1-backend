@@ -40,6 +40,7 @@ Route::group(['prefix' => 'client'], function () {
     // blogs
     Route::get('get-blogs-list', [HomepageController::class, 'getBlogs']);
     Route::get('get-blog-detail/{id}', [HomepageController::class, 'getBlogDetail']);
+    Route::post('like-blog/{id}', [HomepageController::class, 'likeBlog']);
 
 	
     Route::post('appointment', [AppointmentController::class, 'storeAppointment']);

@@ -187,17 +187,7 @@
                                 <input type="text" class="form-control" id="twitter_card" name="twitter_card"  required="true">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="category" class="col-sm-6 control-label">Category</label>
-                            <div class="col-sm-12">
-                                <select class="form-control" id="category" name="category" required>
-                                    <option value="">Select Category</option>
-                                    @foreach($categories as $category)
-                                        <option value="{{ $category->name }}">{{ $category->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
+
                         <div class="form-group ">
                             <label for="canonical" class="col-sm-6 control-label">Canonical</label>
                             <div class="col-sm-12">

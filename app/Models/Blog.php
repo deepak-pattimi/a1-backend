@@ -34,6 +34,7 @@ class Blog extends Model
         'tags',
         'read_time',
         'views',
+        'likes',
         'author_role',
         'author_image'
     ];
