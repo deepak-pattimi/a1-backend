@@ -75,6 +75,27 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label for="category" class="col-sm-6 control-label">Category</label>
+                            <div class="col-sm-12">
+                                <select class="form-control" id="category" name="category" required>
+                                    <option value="">Select Category</option>
+                                    <option value="Health Tips">Health Tips</option>
+                                    <option value="Medical News">Medical News</option>
+                                    <option value="Patient Stories">Patient Stories</option>
+                                    <option value="Wellness">Wellness</option>
+                                    <option value="Treatments">Treatments</option>
+                                    <option value="Events">Events</option>
+                                    <option value="Nutrition">Nutrition</option>
+                                    <option value="Mental Health">Mental Health</option>
+                                    <option value="Cardiology">Cardiology</option>
+                                    <option value="Orthopedics">Orthopedics</option>
+                                    <option value="Gynecology">Gynecology</option>
+                                    <option value="Pediatrics">Pediatrics</option>
+                                </select>
+                            </div>
+                        </div>
+
 
 
                         <x-image-input name="blog_image" columns="col-md-12" value="{{ old('blog_image') }}" id="blog_image" label="Banner image" />
