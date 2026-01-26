@@ -75,13 +75,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group ">
-                            <label for="blog_title_ar" class="col-sm-6 control-label">Blog Title (AR)</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" id="blog_title_ar" name="blog_title_ar"
-                                    placeholder="Enter Blog Title in arabic" required="true">
-                            </div>
-                        </div>
 
 
                         <x-image-input name="blog_image" columns="col-md-12" value="{{ old('blog_image') }}" id="blog_image" label="Banner image" />
@@ -95,12 +88,6 @@
                         </div>
 
 
-                        <div class="form-group ">
-                            <label class="col-sm-6 control-label">Blog Content (AR)</label>
-                            <div class="col-sm-12">
-                            <x-ckeditor id="blog_content_ar" name="blog_content_ar" :value="null" />
-                            </div>
-                        </div>
 
                         <div class="form-group ">
                         <label for="meta_title" class="col-sm-6 control-label">Meta Title</label>
@@ -316,7 +303,12 @@
                 $('#ajaxModel').modal('show');
                 $('#item_id').val(data.id);
                 $('#blog_title').val(data.blog_title);
-                $('#blog_title_ar').val(data.blog_title_ar);
+                $('#category').val(data.category);
+                $('#tags').val(data.tags);
+                $('#read_time').val(data.read_time);
+                $('#author_role').val(data.author_role);
+                // For author_image we can't easily set value on file input, but might need to handle preview if implemented
+
                 $('#meta_title').val(data.meta_title);
                 $('#meta_description').val(data.meta_description);
                 $('#meta_keywords').val(data.meta_keywords);
@@ -342,7 +334,6 @@
                 );
 
                 CKEDITOR.instances['blog_content'].setData(data.blog_content);
-                CKEDITOR.instances['blog_content_ar'].setData(data.blog_content_ar);
                 $('#saveBtn').html('Save Changes');
             })
         });
@@ -357,11 +348,9 @@
             $(this).html('Sending..');
             
             var blog_content = CKEDITOR.instances['blog_content'] ? CKEDITOR.instances['blog_content'].getData() : '';
-            var blog_content_ar = CKEDITOR.instances['blog_content_ar'] ? CKEDITOR.instances['blog_content_ar'].getData() : '';
             
             var formdata = new FormData(document.getElementById('packageForm'));
             formdata.append('blog_content', blog_content);
-            formdata.append('blog_content_ar', blog_content_ar);
             
             $.ajax({
                 enctype: 'multipart/form-data',

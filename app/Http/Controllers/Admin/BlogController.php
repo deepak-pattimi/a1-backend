@@ -52,8 +52,6 @@ class BlogController extends Controller
         $rules = [
             'blog_title' => 'required|string|max:255',
             'blog_content' => 'required|string',
-            'blog_title_ar' => 'required|string|max:255',
-            'blog_content_ar' => 'required|string',
             'meta_title' => 'nullable|string|max:2048',
             'meta_description' => 'nullable|string|max:2048',
             'meta_keywords' => 'nullable|string|max:2048',
@@ -70,6 +68,11 @@ class BlogController extends Controller
             'twitter_card' => 'nullable|string|max:2048',
             'canonical' => 'nullable|max:2048',
             'og_local' => 'nullable|string|max:2048',
+            'category' => 'required|string|max:255',
+            'tags' => 'nullable|string',
+            'read_time' => 'nullable|string|max:255',
+            'author_role' => 'nullable|string|max:255',
+            'author_image' => 'nullable|string|max:2048',
         ];
 
         if (!$request->item_id) {
@@ -82,8 +85,6 @@ class BlogController extends Controller
             'slug' => Str::slug($request->blog_title),
             'blog_title' => $request->blog_title,
             'blog_content' => $request->blog_content,
-            'blog_title_ar' => $request->blog_title_ar,
-            'blog_content_ar' => $request->blog_content_ar,
             'meta_title' => $request->meta_title,
             'meta_description' => $request->meta_description,
             'meta_keywords' => $request->meta_keywords,
@@ -100,6 +101,11 @@ class BlogController extends Controller
             'twitter_card' => $request->twitter_card,
             'canonical' => $request->canonical,
             'og_local' => $request->og_local,
+            'category' => $request->category,
+            'tags' => $request->tags,
+            'read_time' => $request->read_time,
+            'author_role' => $request->author_role,
+            'author_image' => $request->author_image,
         ];
 
         if($request->blog_image){

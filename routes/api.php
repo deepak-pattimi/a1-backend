@@ -37,6 +37,10 @@ Route::group(['prefix' => 'client'], function () {
 	// reviews
 	Route::get('get-reviews-list', [HomepageController::class, 'getReviews']);
 
+    // blogs
+    Route::get('get-blogs-list', [HomepageController::class, 'getBlogs']);
+    Route::get('get-blog-detail/{id}', [HomepageController::class, 'getBlogDetail']);
+
 	
     Route::post('appointment', [AppointmentController::class, 'storeAppointment']);
     Route::post('contact', [AppointmentController::class, 'storeContact']);

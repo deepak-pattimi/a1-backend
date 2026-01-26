@@ -14,7 +14,9 @@ use App\Models\Imagegallery;
 use App\Models\GeneralSetting;
 use App\Models\Category;
 use App\Models\Page;
+use App\Models\Page;
 use App\Models\Reviews;
+use App\Models\Blog;
 
 class HomepageController extends Controller
 {
@@ -84,6 +86,60 @@ class HomepageController extends Controller
         return response()->json($reviews, 200);
     }
     
+    // get blogs list api
+    public function getBlogs(Request $request){
+        $query = Blog::where('status', 1);
+
+        if($request->category && $request->category !== 'all'){
+            $query->where('category', $request->category);
+        }
+
+        if($request->search){
+            $query->where('blog_title', 'like', '%' . $request->search . '%');
+        }
+
+        $blogs = $query->latest()->paginate(8);
+        
+        // Get unique categories for filter
+        $categories = Blog::where('status', 1)->select('category')->distinct()->pluck('category');
+        
+        return response()->json([
+            'blogs' => $blogs,
+            'categories' => $categories
+        ], 200);
+    }
+
+    // get blog detail api
+    public function getBlogDetail($id){
+        $blog = Blog::find($id);
+        
+        if(!$blog){
+            return response()->json(['message' => 'Blog not found'], 404);
+        }
+
+        // Increment views
+        $blog->increment('views');
+
+        // Related posts
+        $related = Blog::where('category', $blog->category)
+            ->where('id', '!=', $blog->id)
+            ->where('status', 1)
+            ->limit(3)
+            ->get();
+
+        // Popular posts
+        $popular = Blog::where('id', '!=', $blog->id)
+            ->where('status', 1)
+            ->orderBy('views', 'desc')
+            ->limit(5)
+            ->get();
+
+        return response()->json([
+            'blog' => $blog,
+            'related' => $related,
+            'popular' => $popular
+        ], 200);
+    }
     
 
 }

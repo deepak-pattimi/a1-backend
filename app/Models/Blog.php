@@ -13,8 +13,6 @@ class Blog extends Model
         'blog_title',
         'blog_content',
         'blog_image',
-        'blog_title_ar',
-        'blog_content_ar',
         'meta_title',
         'meta_description',
         'meta_keywords',
@@ -31,6 +29,12 @@ class Blog extends Model
         'twitter_card',
         'canonical',
         'og_local',
-        'status'
+        'status',
+        'category',
+        'tags',
+        'read_time',
+        'views',
+        'author_role',
+        'author_image'
     ];
 }

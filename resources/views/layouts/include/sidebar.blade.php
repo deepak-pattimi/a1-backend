@@ -99,10 +99,10 @@
                     <a href="{{url('admin/reviews')}}"><i class="ik ik-star"></i><span>Reviews</span> </a>
                 </div>
 
-<!-- 
+
                 <div class="nav-item {{ ($segment2 == 'blog') ? 'active' : '' }}">
                     <a href="{{url('admin/blog')}}"><i class="ik ik-rss"></i><span>Blogs</span> </a>
-                </div> -->
+                </div>
                 <!-- <div class="nav-item {{ ($segment2 == 'seo') ? 'active' : '' }}">
                     <a href="{{url('admin/seo')}}"><i class="ik ik-code"></i><span>SEO Sections</span> </a>
                 </div> -->
