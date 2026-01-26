@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use DataTables;
 use App\CPU\ImageManager;
 use App\Models\Blog;
+use App\Models\Category;
 use Illuminate\Support\Str;
 
 class BlogController extends Controller
@@ -38,7 +39,8 @@ class BlogController extends Controller
                 ->make(true);
         }
 
-        return view('pages.blog.index');
+        $categories = Category::all();
+        return view('pages.blog.index', compact('categories'));
     }
 
     /**
