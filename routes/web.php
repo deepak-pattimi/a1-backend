@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\SeoController;
 use App\Http\Controllers\Admin\DynamicCrudController;
 use App\Http\Controllers\Admin\AppointmentController;
+use App\Http\Controllers\Admin\PageDynamicItemController;
 
 Route::get('/', [LoginController::class, 'showLoginForm'])->name('admin.login');
 
@@ -104,6 +105,18 @@ Route::group(['prefix' => 'admin'], function () {
 
         // Dynamic pages
         Route::resource('pages', PageController::class);
+        // Dynamic items for pages
+        Route::prefix('pages/{page}')->name('pages.')->group(function () {
+            Route::resource('dynamic-items', PageDynamicItemController::class)->names([
+                'index' => 'dynamic-items.index',
+                'create' => 'dynamic-items.create',
+                'store' => 'dynamic-items.store',
+                'edit' => 'dynamic-items.edit',
+                'update' => 'dynamic-items.update',
+                'destroy' => 'dynamic-items.destroy'
+            ]);
+        });
+        
         // Blog
         Route::resource('/blog', BlogController::class);
         // SEO

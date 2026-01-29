@@ -29,7 +29,7 @@ class PageController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
 
-$dynamicItemsUrl = url("pages/dynamic-items/{$row->id}");
+                    $dynamicItemsUrl = route('pages.dynamic-items.index', ['page' => $row->id]);
                     $btn = '<a href="'.$dynamicItemsUrl.'" data-toggle="tooltip" data-original-title="Dynamic Items" class="btn btn-info btn-sm mr-1"><i class="fa fa-list"></i></a>';
 
                     $btn .= '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-primary btn-sm editProduct"><i class="fa fa-pen"></i></a>';

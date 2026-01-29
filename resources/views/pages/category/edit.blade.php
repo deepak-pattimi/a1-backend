@@ -18,7 +18,7 @@
         <div class="form-group row">
             <label for="order_no" class="col-sm-2 col-form-label">Order</label>
             <div class="col-sm-10">
-                <input type="number" name="order_no" id="order_no" class="form-control" value="{{ $item->order }}" />
+                <input type="number" name="order_no" id="order_no" class="form-control" value="{{ $item->order_no }}" />
             </div>
         </div>
 
