@@ -31,7 +31,7 @@ class YtvideoController extends Controller
 
         $data = [
             'youtubelink' => $request->input('youtubelink'),
-            
+            'thumbnail' => $request->input('thumbnail'),
         ];
 
 
@@ -57,7 +57,7 @@ class YtvideoController extends Controller
 
         $data = [
             'youtubelink' => $request->input('youtubelink'),
-            
+            'thumbnail' => $request->input('thumbnail'),
         ];
 
 

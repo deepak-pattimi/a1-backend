@@ -45,7 +45,10 @@
                     @else
                         <td>{{ $item->thumbnail }}</td>
                     @endif
-                <td>{{ $item->youtubelink }}</td>
+                <td>
+                    <!-- youtube video view -->
+                    <iframe width="100" height="50" src="{{ $item->youtubelink }}" frameborder="0" allowfullscreen></iframe>
+                </td>
 <td>
 
         <a href="{{ route('ytvideo.edit', $item->id) }}" class="btn btn-info">Edit</a>
