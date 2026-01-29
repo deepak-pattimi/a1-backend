@@ -34,6 +34,7 @@ Route::group(['prefix' => 'client'], function () {
 	Route::get('get-specialized-list', [HomepageController::class, 'getSpecialized']);
 	Route::get('get-depratments-list', [HomepageController::class, 'getDepratments']);
 	Route::get('get-imagegallery-list', [HomepageController::class, 'getImagegallery']);
+	Route::get('get-videogallery-list', [HomepageController::class, 'getVideogallery']);
 	// reviews
 	Route::get('get-reviews-list', [HomepageController::class, 'getReviews']);
 

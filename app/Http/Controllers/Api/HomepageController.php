@@ -63,6 +63,12 @@ class HomepageController extends Controller
         return response()->json($imagegallery, 200);
     }
 
+    // video gallery list api
+    public function getVideogallery(){
+        $youtube_videos = Ytvideo::orderBy('id', 'ASC')->get();
+        return response()->json($youtube_videos, 200);
+    }
+
     // general settings list api
     public function getGeneralSettings(){
         $general_settings = GeneralSetting::first();

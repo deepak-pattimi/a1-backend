@@ -124,6 +124,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::resource('/seo', SeoController::class);
         Route::get('/create-dynamic-crud', [DynamicCrudController::class, 'create'])->name('dynamic.crud.create');
         Route::post('/dynamic-crud/store', [DynamicCrudController::class, 'store'])->name('dynamic.crud.store');
+        Route::resource('ytvideo', Admin\YtvideoController::class);
     });
 
 
