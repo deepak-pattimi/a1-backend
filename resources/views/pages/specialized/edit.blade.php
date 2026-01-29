@@ -16,7 +16,13 @@
 <div class="form-group row">
     <label for="title" class="col-sm-2 col-form-label">Title</label>
     <div class="col-sm-10">
-        <input type="text" name="title" class="form-control" value="{{ $item->title }}>
+        <input type="text" name="title" class="form-control" value="{{ $item->title }}">
+    </div>
+</div>
+<div class="form-group row">
+    <label for="short_description" class="col-sm-2 col-form-label">Short Description</label>
+    <div class="col-sm-10">
+        <textarea name="short_description" class="form-control" rows="3">{{ $item->short_description }}</textarea>
     </div>
 </div>
 <div class="form-group row">

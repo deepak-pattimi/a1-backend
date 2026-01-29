@@ -5,13 +5,15 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
+// slug generator
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
 
         public function index()
     {
-        $items = Category::all();
+        $items = Category::whereOrderBy('order', 'asc')->get();
         return view('pages.category.index', compact('items'));
     }
 
@@ -26,12 +28,13 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            
+            'order' => 'required',
         ]);
 
         $data = [
             'name' => $request->input('name'),
-            
+            'slug' => Str::slug($request->input('name')),
+            'order' => $request->input('order'),
         ];
 
 
@@ -52,12 +55,14 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'order' => 'required',
             
         ]);
 
         $data = [
             'name' => $request->input('name'),
-            
+            'slug' => Str::slug($request->input('name')),
+            'order' => $request->input('order'),
         ];
 
 

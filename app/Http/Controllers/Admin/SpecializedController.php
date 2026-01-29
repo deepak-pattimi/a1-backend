@@ -27,12 +27,14 @@ class SpecializedController extends Controller
         $request->validate([
             'image' => 'required',
             'title' => 'required',
+            'short_description' => 'required',
             'content' => 'required',
             
         ]);
 
         $data = [
             'image' => $request->input('image'),
+            'short_description' => $request->input('short_description'),
             'title' => $request->input('title'),
             'content' => $request->input('content'),
             
@@ -57,12 +59,14 @@ class SpecializedController extends Controller
         $request->validate([
             'image' => 'required',
             'title' => 'required',
+            'short_description' => 'required',
             'content' => 'required',
             
         ]);
 
         $data = [
             'image' => $request->input('image'),
+            'short_description' => $request->input('short_description'),
             'title' => $request->input('title'),
             'content' => $request->input('content'),
             

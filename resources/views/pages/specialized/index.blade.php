@@ -14,7 +14,7 @@
 <th>ID</th>
 <th>Image</th>
 <th>Title</th>
-<th>Content</th>
+<th>Short Description</th>
 <th>Actions</th>
 </tr>
 </thead>
@@ -68,7 +68,7 @@
                     @else
                         <td>{{ $item->title }}</td>
                     @endif
-                <td>{{ $item->content }}</td>
+                <td>{{ $item->short_description }}</td>
 <td>
 
         <a href="{{ route('specialized.edit', $item->id) }}" class="btn btn-info">Edit</a>

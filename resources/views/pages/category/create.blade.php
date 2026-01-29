@@ -7,11 +7,17 @@
         <form method="POST" action="{{ route('category.store') }}" enctype="multipart/form-data">
         @csrf
         <div class="form-group row">
-    <label for="name" class="col-sm-2 col-form-label">Name</label>
-    <div class="col-sm-10">
-        <input type="text" name="name" id="name" class="form-control" />
-    </div>
-</div>
+            <label for="name" class="col-sm-2 col-form-label">Name</label>
+            <div class="col-sm-10">
+                <input type="text" name="name" id="name" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="order" class="col-sm-2 col-form-label">Order</label>
+            <div class="col-sm-10">
+                <input type="number" name="order" id="order" class="form-control" />
+            </div>
+        </div>
 
         <div class="form-group row">
 

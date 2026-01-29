@@ -71,7 +71,7 @@ class HomepageController extends Controller
 
     // get dynamic page category with page names
     public function getDynamicPageCategory(){
-        $category = Category::orderBy('id', 'ASC')->with('pages')->get();
+        $category = Category::orderBy('order', 'ASC')->with('pages')->get();
         return response()->json($category, 200);
     }
     

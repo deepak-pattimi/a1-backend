@@ -8,5 +8,5 @@ class Specialized extends Model
 {
     use HasFactory;
     protected $table = 'specialized';
-    protected $fillable = ['image', 'title', 'content'];
+    protected $fillable = ['image', 'title', 'short_description', 'content'];
 }

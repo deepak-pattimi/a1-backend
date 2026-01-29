@@ -13,6 +13,8 @@
 <tr>
 <th>ID</th>
 <th>Name</th>
+<th>Slug</th>
+<th>Order</th>
 <th>Actions</th>
 </tr>
 </thead>
@@ -23,6 +25,8 @@
 
         <td>{{ $item->id }}</td>
 <td>{{ $item->name }}</td>
+<td>{{ $item->slug }}</td>
+<td>{{ $item->order }}</td>
 <td>
 
         <a href="{{ route('category.edit', $item->id) }}" class="btn btn-info">Edit</a>

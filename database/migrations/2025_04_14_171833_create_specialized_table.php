@@ -11,6 +11,7 @@ class CreateSpecializedTable extends Migration
             $table->id();
             $table->string('image')->nullable();
             $table->string('title')->nullable();
+            $table->text('short_description')->nullable();
             $table->string('content')->nullable();
             
             $table->timestamps();

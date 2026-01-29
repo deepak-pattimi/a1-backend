@@ -10,7 +10,8 @@ class CreateCategoryTable extends Migration
         Schema::create('category', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
-            
+            $table->string('slug')->nullable();
+            $table->integer('order')->nullable();
             $table->timestamps();
         });
     }
