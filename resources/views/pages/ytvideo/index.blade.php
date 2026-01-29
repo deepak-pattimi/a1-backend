@@ -45,10 +45,34 @@
                     @else
                         <td>{{ $item->thumbnail }}</td>
                     @endif
-                <td>
-                    <!-- youtube video view -->
-                    <iframe width="100" height="50" src="{{ $item->youtubelink }}" frameborder="0" allowfullscreen></iframe>
-                </td>
+               <td>
+    @php
+        $videoId = null;
+
+        // Shorts URL
+        if (preg_match('~youtube\.com/shorts/([^\?\/]+)~', $item->youtubelink, $m)) {
+            $videoId = $m[1];
+        }
+        // Normal watch URL
+        elseif (preg_match('~v=([^\&]+)~', $item->youtubelink, $m)) {
+            $videoId = $m[1];
+        }
+    @endphp
+
+    @if($videoId)
+        <iframe
+            width="100"
+            height="50"
+            src="https://www.youtube.com/embed/{{ $videoId }}"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+        </iframe>
+    @else
+        <span>Invalid video</span>
+    @endif
+</td>
+
 <td>
 
         <a href="{{ route('ytvideo.edit', $item->id) }}" class="btn btn-info">Edit</a>
