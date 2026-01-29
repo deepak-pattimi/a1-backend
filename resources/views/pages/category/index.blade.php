@@ -26,7 +26,7 @@
         <td>{{ $item->id }}</td>
 <td>{{ $item->name }}</td>
 <td>{{ $item->slug }}</td>
-<td>{{ $item->order }}</td>
+<td>{{ $item->order_no }}</td>
 <td>
 
         <a href="{{ route('category.edit', $item->id) }}" class="btn btn-info">Edit</a>

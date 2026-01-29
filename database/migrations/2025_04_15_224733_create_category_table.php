@@ -11,7 +11,7 @@ class CreateCategoryTable extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('slug')->nullable();
-            $table->integer('order')->nullable();
+            $table->integer('order_no')->nullable();
             $table->timestamps();
         });
     }

@@ -28,13 +28,13 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'order' => 'required',
+            'order_no' => 'required',
         ]);
 
         $data = [
             'name' => $request->input('name'),
             'slug' => Str::slug($request->input('name')),
-            'order' => $request->input('order'),
+            'order_no' => $request->input('order_no'),
         ];
 
 
@@ -55,14 +55,14 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'order' => 'required',
+            'order_no' => 'required',
             
         ]);
 
         $data = [
             'name' => $request->input('name'),
             'slug' => Str::slug($request->input('name')),
-            'order' => $request->input('order'),
+            'order_no' => $request->input('order_no'),
         ];
 
 

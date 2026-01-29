@@ -13,9 +13,9 @@
             </div>
         </div>
         <div class="form-group row">
-            <label for="order" class="col-sm-2 col-form-label">Order</label>
+            <label for="order_no" class="col-sm-2 col-form-label">Order</label>
             <div class="col-sm-10">
-                <input type="number" name="order" id="order" class="form-control" />
+                <input type="number" name="order_no" id="order_no" class="form-control" />
             </div>
         </div>
 
