@@ -13,7 +13,7 @@ class CategoryController extends Controller
 
         public function index()
     {
-        $items = Category::whereOrderBy('order', 'asc')->get();
+        $items = Category::orderBy('order_no', 'asc')->get();
         return view('pages.category.index', compact('items'));
     }
 
