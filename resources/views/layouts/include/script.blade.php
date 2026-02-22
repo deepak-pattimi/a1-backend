@@ -37,3 +37,16 @@
 
 @stack('script')
 @stack('scripts')
+
+<script>
+    /* ==============================================================
+       Global Fix: Bootstrap modal steals focus from CKEditor dialogs
+       This prevents keyboard input from being blocked in Image Properties,
+       Link dialogs, etc. — applies to every page using CKEditor.
+    ============================================================== */
+    $(document).on('focusin', function (e) {
+        if ($(e.target).closest('.cke_dialog_ui_input_text, .cke_dialog_ui_input_textarea, .cke_dialog, .cke_editor').length) {
+            e.stopImmediatePropagation();
+        }
+    });
+</script>
