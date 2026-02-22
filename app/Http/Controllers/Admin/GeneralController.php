@@ -69,4 +69,27 @@ class GeneralController extends Controller
     
     
 
+    public function ckeditorUpload(Request $request)
+    {
+        if ($request->hasFile('upload')) {
+            $file = $request->file('upload');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/ckeditor'), $filename);
+            $url = asset('uploads/ckeditor/' . $filename);
+
+            return response()->json([
+                'uploaded' => 1,
+                'fileName' => $filename,
+                'url' => $url,
+            ]);
+        }
+
+        return response()->json([
+            'uploaded' => 0,
+            'error' => ['message' => 'No file uploaded.'],
+        ]);
+    }
+
+
+
 }

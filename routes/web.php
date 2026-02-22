@@ -117,6 +117,9 @@ Route::group(['prefix' => 'admin'], function () {
             ]);
         });
         
+        // CKEditor Image Upload
+        Route::post('/ckeditor/upload', [GeneralController::class, 'ckeditorUpload'])->name('ckeditor.upload');
+
         // Blog
         Route::resource('/blog', BlogController::class);
         // SEO

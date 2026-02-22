@@ -3,10 +3,12 @@
 </div>
 
 @push('scripts')
-<script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         CKEDITOR.replace('{{ $id }}', {
+            filebrowserUploadUrl: '{{ route("ckeditor.upload") }}?_token={{ csrf_token() }}',
+            filebrowserUploadMethod: 'form',
+            uploadUrl: '{{ route("ckeditor.upload") }}?_token={{ csrf_token() }}',
             on: {
                 instanceReady: function (evt) {
                     evt.editor.setData(`{!! $value !!}`);

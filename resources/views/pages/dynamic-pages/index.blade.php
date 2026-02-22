@@ -307,9 +307,10 @@
         $('#saveBtn').click(function (e) {
             e.preventDefault();
 
-            // ✅ Sync CKEditor
-            if (CKEDITOR.instances['content']) {
-                CKEDITOR.instances['content'].updateElement();
+            // ✅ Sync CKEditor content to textarea before serializing
+            for (var instanceName in CKEDITOR.instances) {
+                var editorData = CKEDITOR.instances[instanceName].getData();
+                $('textarea[name="' + instanceName + '"]').val(editorData);
             }
 
             $('#saveBtn').html('Sending...');

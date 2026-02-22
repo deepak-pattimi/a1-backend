@@ -5,7 +5,7 @@
 <script src="{{ asset('plugins/select2/dist/js/select2.min.js') }}"></script>
 <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
 <script src="{{ asset('plugins/lazy/jquery.lazy.min.js') }}"></script>
-<script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/4.22.1/full/ckeditor.js"></script>
 
 <!-- DataTables JS -->
 <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
@@ -36,3 +36,4 @@
 </script>
 
 @stack('script')
+@stack('scripts')
