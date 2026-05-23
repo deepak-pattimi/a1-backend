@@ -42,6 +42,15 @@
                 <div class="card-body">
                     <table class="table table-bordered data-table">
                         <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone Number</th>
+                                <th>Reason</th>
+                                <th>Message</th>
+                                <th>Action</th>
+                            </tr>
                         </thead>
                         <tbody></tbody>
                     </table>
@@ -73,8 +82,8 @@
                             <input
                                 type="text"
                                 class="form-control"
-                                id="name"
-                                name="name"
+                                id="fullname"
+                                name="fullname"
                                 placeholder="Enter name"
                                 readonly
                             />
@@ -82,7 +91,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="name" class="col-sm-6 control-label"
+                        <label for="email" class="col-sm-6 control-label"
                             >Email</label
                         >
                         <div class="col-sm-12">
@@ -97,16 +106,32 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="name" class="col-sm-6 control-label"
+                        <label for="mobile" class="col-sm-6 control-label"
                             >Phone number</label
                         >
                         <div class="col-sm-12">
                             <input
                                 type="number"
                                 class="form-control"
-                                id="phone"
-                                name="phone"
-                                readonly                            />
+                                id="mobile"
+                                name="mobile"
+                                readonly
+                            />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reason" class="col-sm-6 control-label"
+                            >Reason</label
+                        >
+                        <div class="col-sm-12">
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="reason"
+                                name="reason"
+                                readonly
+                            />
                         </div>
                     </div>
 
@@ -166,6 +191,7 @@
                 { title:'Name', data: "fullname", name: "fullname" },
                 { title:'Email Address', data: "email", name: "email" },
                 { title:'Phone Number', data: "mobile", name: "mobile" },
+                { title:'Reason', data: "reason", name: "reason" },
                 { title:'Message', data: "message", name: "message" },
                 {
                     title:'Action',
@@ -194,10 +220,11 @@
                     $("#saveBtn").val("edit-user");
                     $("#ajaxModel").modal("show");
                     $("#item_id").val(data.id);
-                    $("#name").val(data.name);
+                    $("#fullname").val(data.fullname);
                     $("#email").val(data.email);
-                    $("#phone").val(data.phone);
-                    $("#address").val(data.address);
+                    $("#mobile").val(data.mobile);
+                    $("#reason").val(data.reason);
+                    $("#message").val(data.message);
                 }
             );
         });
