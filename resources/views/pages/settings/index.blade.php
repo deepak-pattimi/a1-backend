@@ -39,6 +39,7 @@
             <x-image-input name="header_logo" columns="col-md-3" value="{{ $general->header_logo }}" label="Header Logo" />
             <x-image-input name="footer_logo" columns="col-md-3" value="{{ $general->footer_logo }}" label="Footer Logo" />
             <x-image-input name="favicon" columns="col-md-3" value="{{ $general->favicon }}" label="Favicon" />
+            <x-image-input name="about_image" columns="col-md-3" value="{{ $general->about_image }}" label="About Us Image" />
             
             <div class="form-group col-md-3">
                 <label for="header_phone">Header Phone</label>

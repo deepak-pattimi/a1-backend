@@ -39,7 +39,8 @@ class GeneralController extends Controller
             'website_name' => $request->website_name,
             'footer_logo' => $request->footer_logo,
             'header_logo' => $request->header_logo,
-            'favicon' =>    $request->favicon
+            'favicon' =>    $request->favicon,
+            'about_image' => $request->about_image
         ];
             GeneralSetting::where(['id' =>1])->update($data);
             return redirect()->back()->with('success', "Data has been updated");

@@ -33,6 +33,7 @@ class GeneralSettingSeeder extends Seeder
                 'footer_copyright' => '© 2023 Prashanth. All Rights Reserved.',
                 'website_name' => 'Prashanth goud',
                 'favicon' => '/img/logo.png',
+                'about_image' => '/img/about-main.jpg',
             ]);
     }
 }
