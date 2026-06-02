@@ -21,14 +21,9 @@
                 <img src="{{ asset($value) }}" alt="" onerror="this.src='/img/logo.png';" style="height:30px; margin-right: 10px;">
                 <button type="button" class="btn btn-sm btn-danger position-absolute" style="top:0; right:0;" onclick="singleRemoveImage('{{ $name }}')">X</button>
             @endif
+        </div>
         <input type="file" id="{{ $name }}_file" name="{{ $name }}_file" class="form-control mt-2" accept="image/*" />
         <small class="form-text text-muted">Or upload from your device.</small>
-        <div class="mt-2 position-relative" id="preview-{{ $name }}">
-            @if($value)
-                <img src="{{ asset($value) }}" alt="" onerror="this.src='/img/logo.png';" style="height:30px; margin-right: 10px;">
-                <button type="button" class="btn btn-sm btn-danger position-absolute" style="top:0; right:0;" onclick="singleRemoveImage('{{ $name }}')">X</button>
-            @endif
-        </div>
     </div>
 </div>
 
