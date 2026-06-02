@@ -67,3 +67,53 @@
 [2026-01-24 12:02:42] local.INFO: Creating offline appointment record {"appointment_data":{"fullname":"siva","mobile":"9393939393","email":"123@gmail.com","selected_date":"2026-01-30","selected_time":"17:36","reason":"memory_disorders","message":"hi","status":"pending","payment_method":"offline","amount":500,"payment_status":"pending"}} 
 [2026-01-24 12:02:42] local.INFO: Offline appointment created successfully {"appointment_id":102} 
 [2026-01-24 12:02:42] local.INFO: Offline appointment booking completed successfully {"response_data":{"status":200,"message":"Appointment booked successfully!","appointment_id":102,"payment_method":"offline"}} 
+[2026-06-02 06:06:26] local.ERROR: Class "UserController" does not exist {"exception":"[object] (ReflectionException(code: -1): Class \"UserController\" does not exist at D:\\Documents\\learning\\a1\\Backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\RouteListCommand.php:225)
+[stacktrace]
+#0 D:\\Documents\\learning\\a1\\Backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\RouteListCommand.php(225): ReflectionClass->__construct('UserController')
+#1 D:\\Documents\\learning\\a1\\Backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\RouteListCommand.php(147): Illuminate\\Foundation\\Console\\RouteListCommand->isVendorRoute(Object(Illuminate\\Routing\\Route))
+#2 D:\\Documents\\learning\\a1\\Backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\RouteListCommand.php(116): Illuminate\\Foundation\\Console\\RouteListCommand->getRouteInformation(Object(Illuminate\\Routing\\Route))
+#3 [internal function]: Illuminate\\Foundation\\Console\\RouteListCommand->Illuminate\\Foundation\\Console\\{closure}(Object(Illuminate\\Routing\\Route), 71)
+#4 D:\\Documents\\learning\\a1\\Backend\\vendor\\laravel\\framework\\src\\Illuminate\\Collections\\Arr.php(600): array_map(Object(Closure), Array, Array)
+#5 D:\\Documents\\learning\\a1\\Backend\\vendor\\laravel\\framework\\src\\Illuminate\\Collections\\Collection.php(778): Illuminate\\Support\\Arr::map(Array, Object(Closure))
+#6 D:\\Documents\\learning\\a1\\Backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\RouteListCommand.php(115): Illuminate\\Support\\Collection->map(Object(Closure))
+#7 D:\\Documents\\learning\\a1\\Backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\RouteListCommand.php(101): Illuminate\\Foundation\\Console\\RouteListCommand->getRoutes()
+#8 D:\\Documents\\learning\\a1\\Backend\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(36): Illuminate\\Foundation\\Console\\RouteListCommand->handle()
+#9 D:\\Documents\\learning\\a1\\Backend\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(41): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#10 D:\\Documents\\learning\\a1\\Backend\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#11 D:\\Documents\\learning\\a1\\Backend\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#12 D:\\Documents\\learning\\a1\\Backend\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(662): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#13 D:\\Documents\\learning\\a1\\Backend\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(211): Illuminate\\Container\\Container->call(Array)
+#14 D:\\Documents\\learning\\a1\\Backend\\vendor\\symfony\\console\\Command\\Command.php(326): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#15 D:\\Documents\\learning\\a1\\Backend\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(180): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#16 D:\\Documents\\learning\\a1\\Backend\\vendor\\symfony\\console\\Application.php(1088): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#17 D:\\Documents\\learning\\a1\\Backend\\vendor\\symfony\\console\\Application.php(324): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Foundation\\Console\\RouteListCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#18 D:\\Documents\\learning\\a1\\Backend\\vendor\\symfony\\console\\Application.php(175): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#19 D:\\Documents\\learning\\a1\\Backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(201): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#20 D:\\Documents\\learning\\a1\\Backend\\artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#21 {main}
+"} 
+[2026-06-02 06:08:12] local.ERROR: Class "UserController" does not exist {"exception":"[object] (ReflectionException(code: -1): Class \"UserController\" does not exist at D:\\Documents\\learning\\a1\\Backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\RouteListCommand.php:225)
+[stacktrace]
+#0 D:\\Documents\\learning\\a1\\Backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\RouteListCommand.php(225): ReflectionClass->__construct('UserController')
+#1 D:\\Documents\\learning\\a1\\Backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\RouteListCommand.php(147): Illuminate\\Foundation\\Console\\RouteListCommand->isVendorRoute(Object(Illuminate\\Routing\\Route))
+#2 D:\\Documents\\learning\\a1\\Backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\RouteListCommand.php(116): Illuminate\\Foundation\\Console\\RouteListCommand->getRouteInformation(Object(Illuminate\\Routing\\Route))
+#3 [internal function]: Illuminate\\Foundation\\Console\\RouteListCommand->Illuminate\\Foundation\\Console\\{closure}(Object(Illuminate\\Routing\\Route), 71)
+#4 D:\\Documents\\learning\\a1\\Backend\\vendor\\laravel\\framework\\src\\Illuminate\\Collections\\Arr.php(600): array_map(Object(Closure), Array, Array)
+#5 D:\\Documents\\learning\\a1\\Backend\\vendor\\laravel\\framework\\src\\Illuminate\\Collections\\Collection.php(778): Illuminate\\Support\\Arr::map(Array, Object(Closure))
+#6 D:\\Documents\\learning\\a1\\Backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\RouteListCommand.php(115): Illuminate\\Support\\Collection->map(Object(Closure))
+#7 D:\\Documents\\learning\\a1\\Backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\RouteListCommand.php(101): Illuminate\\Foundation\\Console\\RouteListCommand->getRoutes()
+#8 D:\\Documents\\learning\\a1\\Backend\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(36): Illuminate\\Foundation\\Console\\RouteListCommand->handle()
+#9 D:\\Documents\\learning\\a1\\Backend\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(41): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#10 D:\\Documents\\learning\\a1\\Backend\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#11 D:\\Documents\\learning\\a1\\Backend\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#12 D:\\Documents\\learning\\a1\\Backend\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(662): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#13 D:\\Documents\\learning\\a1\\Backend\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(211): Illuminate\\Container\\Container->call(Array)
+#14 D:\\Documents\\learning\\a1\\Backend\\vendor\\symfony\\console\\Command\\Command.php(326): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#15 D:\\Documents\\learning\\a1\\Backend\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(180): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#16 D:\\Documents\\learning\\a1\\Backend\\vendor\\symfony\\console\\Application.php(1088): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#17 D:\\Documents\\learning\\a1\\Backend\\vendor\\symfony\\console\\Application.php(324): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Foundation\\Console\\RouteListCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#18 D:\\Documents\\learning\\a1\\Backend\\vendor\\symfony\\console\\Application.php(175): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#19 D:\\Documents\\learning\\a1\\Backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(201): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#20 D:\\Documents\\learning\\a1\\Backend\\artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#21 {main}
+"} 

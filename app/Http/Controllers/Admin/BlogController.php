@@ -73,11 +73,14 @@ class BlogController extends Controller
             'read_time' => 'nullable|string|max:255',
             'author_role' => 'nullable|string|max:255',
             'author_image' => 'nullable|string|max:2048',
+            'blog_image_file' => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:5120',
         ];
 
         if (!$request->item_id) {
-            $rules['blog_image'] = 'required|string|max:2048';
-        } 
+            $rules['blog_image'] = 'required_without:blog_image_file|string|max:2048';
+        } else {
+            $rules['blog_image'] = 'nullable|string|max:2048';
+        }
 
         $request->validate($rules);
 
@@ -108,7 +111,10 @@ class BlogController extends Controller
             'author_image' => $request->author_image,
         ];
 
-        if($request->blog_image){
+        if ($request->hasFile('blog_image_file')) {
+            $fileName = ImageManager::fileUpload($request->file('blog_image_file'), 'uploads/blogs/');
+            $data['blog_image'] = '/uploads/blogs/' . $fileName;
+        } elseif ($request->blog_image) {
             $data['blog_image'] = $request->blog_image;
         }
     
@@ -132,8 +138,8 @@ class BlogController extends Controller
      */
     public function edit($id)
     {
-        $product = Blog::find($id);
-        return response()->json($product);
+        $blog = Blog::findOrFail($id);
+        return response()->json($blog);
     }
 
    

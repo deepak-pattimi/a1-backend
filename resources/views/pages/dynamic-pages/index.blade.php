@@ -59,6 +59,7 @@
             <div class="modal-body">
                 <form id="pageForm" name="pageForm" class="form-horizontal">
                     {{ csrf_field() }}
+                    <div id="formErrors" class="alert alert-danger d-none"></div>
                     <input type="hidden" name="item_id" id="item_id">
                     <div class="form-group">
                         <label for="category_id" class="col-sm-6 control-label">Category</label>
@@ -307,10 +308,11 @@
         $('#saveBtn').click(function (e) {
             e.preventDefault();
 
-            // ✅ Sync CKEditor content to textarea before serializing
+            // Sync CKEditor content to the textarea element before serializing
             for (var instanceName in CKEDITOR.instances) {
-                var editorData = CKEDITOR.instances[instanceName].getData();
-                $('textarea[name="' + instanceName + '"]').val(editorData);
+                if (CKEDITOR.instances.hasOwnProperty(instanceName)) {
+                    CKEDITOR.instances[instanceName].updateElement();
+                }
             }
 
             $('#saveBtn').html('Sending...');

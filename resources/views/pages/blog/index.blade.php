@@ -369,6 +369,10 @@
             e.preventDefault();
             $(this).html('Sending..');
             
+            if (CKEDITOR.instances['blog_content']) {
+                CKEDITOR.instances['blog_content'].updateElement();
+            }
+
             var blog_content = CKEDITOR.instances['blog_content'] ? CKEDITOR.instances['blog_content'].getData() : '';
             
             var formdata = new FormData(document.getElementById('packageForm'));

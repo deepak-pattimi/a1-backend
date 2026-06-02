@@ -48,17 +48,15 @@ class ImageManager
     {
         if ($file != null) {
             $fileName = Carbon::now()->toDateString() . "-" . uniqid() . "." . $file->extension();
-            if (!Storage::disk('public')->exists($path)) {
-                Storage::disk('public')->makeDirectory($path);
+            $uploadPath = public_path($path);
+            if (!file_exists($uploadPath)) {
+                mkdir($uploadPath, 0755, true);
             }
-            Storage::disk('public')->put($path . $fileName, file_get_contents($file));
+            $file->move($uploadPath, $fileName);
         } else {
             $fileName = 'def.pdf';
         }
 
         return $fileName;
-
-
-        return $name;
     }
 }

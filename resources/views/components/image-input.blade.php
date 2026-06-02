@@ -21,6 +21,13 @@
                 <img src="{{ asset($value) }}" alt="" onerror="this.src='/img/logo.png';" style="height:30px; margin-right: 10px;">
                 <button type="button" class="btn btn-sm btn-danger position-absolute" style="top:0; right:0;" onclick="singleRemoveImage('{{ $name }}')">X</button>
             @endif
+        <input type="file" id="{{ $name }}_file" name="{{ $name }}_file" class="form-control mt-2" accept="image/*" />
+        <small class="form-text text-muted">Or upload from your device.</small>
+        <div class="mt-2 position-relative" id="preview-{{ $name }}">
+            @if($value)
+                <img src="{{ asset($value) }}" alt="" onerror="this.src='/img/logo.png';" style="height:30px; margin-right: 10px;">
+                <button type="button" class="btn btn-sm btn-danger position-absolute" style="top:0; right:0;" onclick="singleRemoveImage('{{ $name }}')">X</button>
+            @endif
         </div>
     </div>
 </div>
@@ -43,6 +50,10 @@ function singleOpenFileManager(inputId) {
 
         const input = document.getElementById(inputId);
         const preview = document.getElementById('preview-' + inputId);
+        const fileInput = document.getElementById(inputId + '_file');
+        if (fileInput) {
+            fileInput.value = '';
+        }
 
         let filePath = items[0].url;
         input.value = filePath;
@@ -61,9 +72,17 @@ function singleOpenFileManager(inputId) {
 function singleRemoveImage(inputId) {
     const input = document.getElementById(inputId);
     const preview = document.getElementById('preview-' + inputId);
+    const fileInput = document.getElementById(inputId + '_file');
 
-    input.value = '';
-    preview.innerHTML = '';
+    if (input) {
+        input.value = '';
+    }
+    if (fileInput) {
+        fileInput.value = '';
+    }
+    if (preview) {
+        preview.innerHTML = '';
+    }
 }
 
 function singleViewSelectedFile(inputId) {
@@ -77,5 +96,40 @@ function singleViewSelectedFile(inputId) {
     }
 }
 
+function initLocalFileInput(inputId) {
+    const fileInput = document.getElementById(inputId + '_file');
+    const textInput = document.getElementById(inputId);
+    const preview = document.getElementById('preview-' + inputId);
+
+    if (!fileInput) {
+        return;
+    }
+
+    fileInput.addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        if (!file) {
+            return;
+        }
+
+        if (textInput) {
+            textInput.value = '';
+        }
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            preview.innerHTML = `
+                <div class="position-relative" style="display: inline-block;">
+                    <img src="${e.target.result}" style="height:50px;">
+                    <button type="button" class="btn btn-sm btn-danger position-absolute" style="top:0; right:0;" onclick="singleRemoveImage('${inputId}')">X</button>
+                </div>
+            `;
+        };
+        reader.readAsDataURL(file);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    initLocalFileInput('{{ $name }}');
+});
 </script>
 @endpush
