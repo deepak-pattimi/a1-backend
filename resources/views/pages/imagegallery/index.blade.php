@@ -13,6 +13,7 @@
 <tr>
 <th>ID</th>
 <th>Image</th>
+<th>Size</th>
 <th>Actions</th>
 </tr>
 </thead>
@@ -28,22 +29,42 @@
                         $fileExtension = pathinfo($item->image, PATHINFO_EXTENSION);
                         
                         // Determine file type
-                        $isImage = in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif']);
-                        $isVideo = in_array($fileExtension, ['mp4', 'webm', 'ogg']);
+                        $isImage = in_array(strtolower($fileExtension), ['jpg', 'jpeg', 'png', 'gif', 'webp']);
+                        $isVideo = in_array(strtolower($fileExtension), ['mp4', 'webm', 'ogg']);
+                        
+                        // Calculate file size
+                        $imagePathStr = $item->image;
+                        if (filter_var($imagePathStr, FILTER_VALIDATE_URL)) {
+                            $parsedUrl = parse_url($imagePathStr);
+                            $imagePathStr = $parsedUrl['path'] ?? $imagePathStr;
+                        }
+                        
+                        $filePath = public_path(ltrim($imagePathStr, '/'));
+                        $fileSize = 'N/A';
+                        if (!empty($item->image) && file_exists($filePath) && is_file($filePath)) {
+                            $bytes = filesize($filePath);
+                            $units = ['B', 'KB', 'MB', 'GB'];
+                            $bytes = max($bytes, 0);
+                            $pow = floor(($bytes ? log($bytes) : 0) / log(1024));
+                            $pow = min($pow, count($units) - 1);
+                            $bytes /= (1 << (10 * $pow));
+                            $fileSize = round($bytes, 2) . ' ' . $units[$pow];
+                        }
                     @endphp
                 
                     @if($isImage)
-                        <td><img src="{{ $item->image }}" style="height: 50px; object-fit: cover;" /></td>
+                        <td><img src="{{ asset($item->image) }}" style="height: 50px; object-fit: cover;" /></td>
                     @elseif($isVideo)
                         <td>
                             <video width="100" height="50" controls>
-                                <source src="{{ $item->image }}" type="video/{{ $fileExtension }}">
+                                <source src="{{ asset($item->image) }}" type="video/{{ $fileExtension }}">
                                 Your browser does not support the video tag.
                             </video>
                         </td>
                     @else
                         <td>{{ $item->image }}</td>
                     @endif
+                <td>{{ $fileSize }}</td>
                 <td>
 
         <a href="{{ route('imagegallery.edit', $item->id) }}" class="btn btn-info">Edit</a>

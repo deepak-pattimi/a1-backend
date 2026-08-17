@@ -7,12 +7,7 @@
         <form method="POST" action="{{ route('ytvideo.update', $item->id) }}" enctype="multipart/form-data">
         @csrf
         @method('PUT')
-        <div class="form-group row">
-    <label for="thumbnail" class="col-sm-2 col-form-label">Thumbnail</label>
-    <div class="col-sm-10">
-        <x-image-input name="thumbnail" columns="col-md-12" value="{{ $item->thumbnail }}" id="thumbnail" label="Thumbnail" />
-    </div>
-</div>
+
 <div class="form-group row">
     <label for="youtubelink" class="col-sm-2 col-form-label">Youtubelink</label>
     <div class="col-sm-10">

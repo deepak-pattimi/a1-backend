@@ -21,6 +21,9 @@
                 instanceReady: function (evt) {
                     evt.editor.setData(`{!! $value !!}`);
                 },
+                change: function(evt) {
+                    evt.editor.updateElement();
+                },
 
                 // Custom image paste handler — uploads image then inserts with real dimensions
                 paste: function (evt) {
@@ -68,6 +71,15 @@
                 }
             }
         });
+    });
+
+    // Fallback: Ensure CKEditor updates the textarea on any form submit
+    document.addEventListener('submit', function (e) {
+        if (typeof CKEDITOR !== 'undefined') {
+            for (var instanceName in CKEDITOR.instances) {
+                CKEDITOR.instances[instanceName].updateElement();
+            }
+        }
     });
 </script>
 @endpush

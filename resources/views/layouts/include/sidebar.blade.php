@@ -50,6 +50,28 @@
                     </div>
                 </div>
 
+                       <div class="nav-item {{ ($segment2 == 'home-h2-section') ? 'active' : '' }}">
+                           <a href="{{url('admin/home-h2-section')}}"><i class="ik ik-layout"></i><span>Home H2 Section</span></a>
+                       </div>
+                       
+                       <div class="nav-item {{ ($segment2 == 'about-clinic') ? 'active' : '' }}">
+                           <a href="{{url('admin/about-clinic')}}"><i class="ik ik-file-text"></i><span>About Clinic</span></a>
+                       </div>
+                       <div class="nav-item {{ ($segment2 == 'about-doctor') ? 'active' : '' }}">
+                           <a href="{{url('admin/about-doctor')}}"><i class="ik ik-file-text"></i><span>About Doctor</span></a>
+                       </div>
+                       
+                       <div class="nav-item {{ ($segment2 == 'contact-page') ? 'active' : '' }}">
+                           <a href="{{url('admin/contact-page')}}"><i class="ik ik-image"></i><span>Contact Page</span></a>
+                       </div>
+
+                       <div class="nav-item {{ ($segment2 == 'appointment-diseases') ? 'active' : '' }}">
+                           <a href="{{url('admin/appointment-diseases')}}"><i class="ik ik-list"></i><span>Appointment Diseases</span></a>
+                       </div>
+                       <div class="nav-item {{ ($segment2 == 'doctors') ? 'active' : '' }}">
+                           <a href="{{url('admin/doctors')}}"><i class="ik ik-users"></i><span>Doctors</span></a>
+                       </div>
+
                        <div class="nav-item {{ ($segment2 == 'appointments') ? 'active' : '' }}">
                     <a href="{{url('admin/appointments')}}"><i class="ik ik-calendar"></i><span>Appointments</span> </a>
                 </div>
@@ -64,25 +86,13 @@
                     <a href="{{url('admin/banners')}}"><i class="ik ik-sliders"></i><span>Banners</span> </a>
                 </div>
 
-                <div class="nav-item {{ ($segment2 == 'highlights') ? 'active' : '' }}">
-                    <a href="{{url('admin/highlights')}}"><i class="ik ik-image"></i><span>Highlights</span> </a>
-                </div>
 
-                <div class="nav-item {{ ($segment2 == 'firstgallery') ? 'active' : '' }}">
-                    <a href="{{url('admin/firstgallery')}}"><i class="ik ik-image"></i><span>First Gallery</span> </a>
-                </div>
                 
-                <div class="nav-item {{ ($segment2 == 'aboutitems') ? 'active' : '' }}">
-                    <a href="{{url('admin/aboutitems')}}"><i class="ik ik-clipboard"></i><span>About Items</span> </a>
-                </div>
 
                 <div class="nav-item {{ ($segment2 == 'specialized') ? 'active' : '' }}">
                     <a href="{{url('admin/specialized')}}"><i class="ik ik-bookmark"></i><span>Specialized section</span> </a>
                 </div>
                 
-                <div class="nav-item {{ ($segment2 == 'depratments') ? 'active' : '' }}">
-                    <a href="{{url('admin/depratments')}}"><i class="ik ik-x-square"></i><span>Depratments</span> </a>
-                </div>
 
                 <div class="nav-item {{ ($segment2 == 'imagegallery') ? 'active' : '' }}">
                     <a href="{{url('admin/imagegallery')}}"><i class="ik ik-image"></i><span>Image Gallery</span> </a>
@@ -91,16 +101,16 @@
                  <div class="nav-item {{ ($segment2 == 'ytvideo') ? 'active' : '' }}">
                     <a href="{{url('admin/ytvideo')}}"><i class="ik ik-video"></i><span>Youtube videos gallery</span> </a>
                 </div>
-                <div class="nav-item {{ ($segment2 == 'category') ? 'active' : '' }}">
-                    <a href="{{url('admin/category')}}"><i class="ik ik-image"></i><span>Dynamic page Category</span> </a>
-                </div>
-
                 <div class="nav-item {{ ($segment2 == 'pages') ? 'active' : '' }}">
-                    <a href="{{url('admin/pages')}}"><i class="ik ik-book"></i><span>Dynamic Pages</span> </a>
+                    <a href="{{url('admin/pages')}}"><i class="ik ik-book"></i><span>Dynamic Pages & Category</span> </a>
                 </div>
                 <!-- reviews -->
                 <div class="nav-item {{ ($segment2 == 'reviews') ? 'active' : '' }}">
                     <a href="{{url('admin/reviews')}}"><i class="ik ik-star"></i><span>Reviews</span> </a>
+                </div>
+                <!-- testimonials -->
+                <div class="nav-item {{ ($segment2 == 'testimonials') ? 'active' : '' }}">
+                    <a href="{{url('admin/testimonials')}}"><i class="ik ik-video"></i><span>Case Studies / Testimonials</span> </a>
                 </div>
 
 

@@ -18,7 +18,7 @@
             <div class="col-lg-8">
                 <div class="page-header-title">
                     <div class="d-inline">
-                        <h5>Pages List</h5>
+                        <h5>Dynamic Pages & Categories</h5>
                     </div>
                 </div>
             </div>
@@ -29,23 +29,74 @@
                             <a href="{{url('/')}}"><i class="ik ik-home"></i></a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="#">Pages List</a>
+                            <a href="#">Dynamic Pages & Categories</a>
                         </li>
                     </ol>
                 </nav>
             </div>
         </div>
     </div>
+    
     <div class="row">
         <div class="col-md-12">
-            <a class="btn btn-primary mb-3" href="javascript:void(0)" id="createNewPage"> Create new page &nbsp; <i class="fa fa-plus"></i></a>
+            
             <div class="card p-3">
+                <div class="card-header border-bottom mb-3">
+                    <h3>Categories</h3>
+                </div>
                 <div class="card-body">
-                    <table class="table table-bordered data-table">
+                    <a href="{{ route('category.create') }}" class="btn btn-primary mb-3 mt-2">Create New Category</a>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Slug</th>
+                                <th>Order</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($category as $item)
+                            <tr>
+                                <td>{{ $item->id }}</td>
+                                <td>{{ $item->name }}</td>
+                                <td>{{ $item->slug }}</td>
+                                <td>{{ $item->order_no }}</td>
+                                <td>
+                                    <a href="{{ route('category.edit', $item->id) }}" class="btn btn-info btn-sm"><i class="fa fa-pen"></i></a>
+                                    <button class="btn btn-danger btn-sm deleteItem" data-id="{{ $item->id }}"><i class="fa fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card p-3 mt-4">
+                <div class="card-header border-bottom mb-3">
+                    <h3>Dynamic Pages</h3>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-3 mt-2">
+                        <a class="btn btn-primary" href="javascript:void(0)" id="createNewPage"> Create new page &nbsp; <i class="fa fa-plus"></i></a>
+                        <div class="form-inline">
+                            <label class="mr-2 font-weight-bold">Filter by Category:</label>
+                            <select id="category_filter" class="form-control" style="width: 250px;">
+                                <option value="">All Categories</option>
+                                @foreach($category as $cat)
+                                    <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <table class="table table-bordered data-table w-100">
                         <!-- Dynamic DataTable from jquery -->
                     </table>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
@@ -87,117 +138,19 @@
                             </div>
                         </div>
 
-
-
-                        <div class="form-group ">
-                        <label for="meta_title" class="col-sm-6 control-label">Meta Title</label>
+                        <div class="form-group mt-4">
+                            <label class="col-sm-12 control-label font-weight-bold">FAQs</label>
                             <div class="col-sm-12">
-                                <input type="text" class="form-control" id="meta_title" name="meta_title"
-                                     required="true">
+                                <div id="faq-container">
+                                    <!-- Dynamic FAQ fields will be appended here -->
+                                </div>
+                                <button type="button" class="btn btn-success btn-sm mt-2" id="add-faq-btn">
+                                    <i class="fa fa-plus"></i> Add FAQ
+                                </button>
                             </div>
                         </div>
 
 
-
-                        <div class="form-group ">
-                        <label for="meta_description" class="col-sm-6 control-label">Meta Description</label>
-                            <div class="col-sm-12">
-                                <textarea class="form-control" id="meta_description" name="meta_description" rows="3" required="true"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="form-group ">
-                            <label for="meta_keywords" class="col-sm-6 control-label">Meta Keywords</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" id="meta_keywords" name="meta_keywords"
-                                     required="true">
-                            </div>
-                        </div>
-
-                        <div class="form-group ">
-                            <label for="meta_author" class="col-sm-6 control-label">Meta Author</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" id="meta_author" name="meta_author"
-                                   required="true">
-                            </div>
-                        </div>
-
-                        <div class="form-group ">
-                            <label for="meta_robots" class="col-sm-6 control-label">Meta Robots</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" id="meta_robots" value="index,follow" name="meta_robots"
-                                     required="true">
-                            </div>
-                        </div>
-
-                        <div class="form-group ">
-                            <label for="og_title" class="col-sm-6 control-label">OG Title</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" id="og_title" name="og_title"  required="true">
-                            </div>
-                        </div>
-                        <div class="form-group ">
-                            <label for="og_description" class="col-sm-6 control-label">OG Description</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" id="og_description" name="og_description"  required="true">
-                            </div>
-                        </div>
-                        <div class="form-group ">
-                            <label for="og_image" class="col-sm-6 control-label">OG Image URL</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" id="og_image" name="og_image"  required="true">
-                            </div>
-                        </div>
-                        <div class="form-group ">
-                            <label for="og_url" class="col-sm-6 control-label">OG URL</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" id="og_url" name="og_url"  required="true">
-                            </div>
-                        </div>
-
-                        <div class="form-group ">
-                            <label for="og_type" class="col-sm-6 control-label">OG Type</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" id="og_type" name="og_type"  required="true">
-                            </div>
-                        </div>
-                        
-                        <div class="form-group ">
-                            <label for="twitter_title" class="col-sm-6 control-label">Twitter Title</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" id="twitter_title" name="twitter_title" required="true">
-                            </div>
-                        </div>
-                        <div class="form-group ">
-                            <label for="twitter_description" class="col-sm-6 control-label">Twitter Description</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" id="twitter_description" name="twitter_description"  required="true">
-                            </div>
-                        </div>
-                        <div class="form-group ">
-                            <label for="twitter_image" class="col-sm-6 control-label">Twitter Image</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" id="twitter_image" name="twitter_image"  required="true">
-                            </div>
-                        </div>
-                        <div class="form-group ">
-                            <label for="twitter_card" class="col-sm-6 control-label">Twitter Card</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" id="twitter_card" name="twitter_card"  required="true">
-                            </div>
-                        </div>
-                        <div class="form-group ">
-                            <label for="canonical" class="col-sm-6 control-label">Canonical</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" id="canonical" name="canonical" required="true">
-                            </div>
-                        </div>
-                        <div class="form-group ">
-                            <label for="og_local" class="col-sm-6 control-label">OG Local</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" id="og_local" name="og_local" required="true">
-                            </div>
-                        </div>
 
                         <div class="col-sm-offset-2 col-sm-10">
                             <button type="submit" class="btn btn-primary" id="saveBtn" value="create">Save</button>
@@ -224,6 +177,34 @@
     }
 
     $(function () {
+        
+        let faqIndex = 0;
+        
+        function addFaqRow(question = '', answer = '') {
+            const html = `
+                <div class="faq-row border p-2 mb-2 bg-light position-relative">
+                    <button type="button" class="btn btn-sm btn-danger remove-faq-btn position-absolute" style="top:5px; right:5px;"><i class="fa fa-times"></i></button>
+                    <div class="form-group mb-2">
+                        <label>Question</label>
+                        <input type="text" name="faqs[${faqIndex}][question]" class="form-control" value="${question}">
+                    </div>
+                    <div class="form-group mb-0">
+                        <label>Answer</label>
+                        <textarea name="faqs[${faqIndex}][answer]" class="form-control" rows="2">${answer}</textarea>
+                    </div>
+                </div>
+            `;
+            $('#faq-container').append(html);
+            faqIndex++;
+        }
+
+        $('#add-faq-btn').click(function() {
+            addFaqRow();
+        });
+
+        $(document).on('click', '.remove-faq-btn', function() {
+            $(this).closest('.faq-row').remove();
+        });
 
         /* ===============================
            CSRF Token
@@ -240,13 +221,22 @@
         var table = $('.data-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('pages.index') }}",
+            ajax: {
+                url: "{{ route('pages.index') }}",
+                data: function (d) {
+                    d.category_id = $('#category_filter').val();
+                }
+            },
             columns: [
                 { data: 'id', name: 'id', title: 'ID' },
                 { data: 'page_name', name: 'page_name', title: 'Page Name' },
                 { data: 'category.name', name: 'category.name', title: 'Category' },
                 { data: 'action', name: 'action', orderable: false, searchable: false, title: 'Action' },
             ]
+        });
+
+        $('#category_filter').change(function(){
+            table.draw();
         });
 
         /* ===============================
@@ -262,6 +252,10 @@
             if (CKEDITOR.instances['content']) {
                 CKEDITOR.instances['content'].setData('');
             }
+            
+            // Reset FAQs
+            $('#faq-container').html('');
+            faqIndex = 0;
         });
 
         /* ===============================
@@ -283,22 +277,15 @@
                     CKEDITOR.instances['content'].setData(data.content ?? '');
                 }
 
-                $('#meta_title').val(data.meta_title);
-                $('#meta_description').val(data.meta_description);
-                $('#meta_keywords').val(data.meta_keywords);
-                $('#meta_author').val(data.meta_author);
-                $('#meta_robots').val(data.meta_robots);
-                $('#og_title').val(data.og_title);
-                $('#og_description').val(data.og_description);
-                $('#og_image').val(data.og_image);
-                $('#og_url').val(data.og_url);
-                $('#og_type').val(data.og_type);
-                $('#twitter_title').val(data.twitter_title);
-                $('#twitter_description').val(data.twitter_description);
-                $('#twitter_image').val(data.twitter_image);
-                $('#twitter_card').val(data.twitter_card);
-                $('#canonical').val(data.canonical);
-                $('#og_local').val(data.og_local);
+                // Populate FAQs
+                $('#faq-container').html('');
+                faqIndex = 0;
+                if (data.faqs && Array.isArray(data.faqs)) {
+                    data.faqs.forEach(faq => {
+                        addFaqRow(faq.question, faq.answer);
+                    });
+                }
+
             });
         });
 
@@ -315,12 +302,24 @@
                 }
             }
 
+            var formData = $('#pageForm').serialize();
+            
+            // Fallback: Ensure content is included if it was stripped
+            if (CKEDITOR.instances['content']) {
+                var editorData = CKEDITOR.instances['content'].getData();
+                var params = new URLSearchParams(formData);
+                if (!params.get('content') || params.get('content').trim() === '') {
+                    params.set('content', editorData);
+                    formData = params.toString();
+                }
+            }
+
             $('#saveBtn').html('Sending...');
 
             $.ajax({
                 url: "{{ route('pages.store') }}",
                 type: "POST",
-                data: $('#pageForm').serialize(),
+                data: formData,
                 dataType: 'json',
 
                 success: function (data) {
@@ -377,6 +376,25 @@
                 },
                 error: function () {
                     showNotification('Error', 'Delete failed!', 'error');
+                }
+            });
+        });
+
+        /* ===============================
+           Delete Category
+        =============================== */
+        $('body').on('click', '.deleteItem', function () {
+            var item_id = $(this).data("id");
+            if (!confirm("Are you sure you want to delete this category?")) return;
+
+            $.ajax({
+                type: "DELETE",
+                url: "{{ url('admin/category') }}/" + item_id,
+                success: function (data) {
+                    location.reload(); 
+                },
+                error: function (response) {
+                    location.reload(); 
                 }
             });
         });

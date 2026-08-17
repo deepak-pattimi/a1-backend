@@ -92,6 +92,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::resource('depratments', Admin\DepratmentsController::class);
         Route::resource('imagegallery', Admin\ImagegalleryController::class);
         Route::resource('category', Admin\CategoryController::class);
+        Route::resource('testimonials', Admin\TestimonialController::class);
         Route::resource('reviews', Admin\ReviewsController::class);
 
         // Change any record status
@@ -102,6 +103,21 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('appointments/{id}/update-status', [AppointmentController::class, 'updateStatus'])->name('appointments.update-status');
         // Note: We removed updatePaymentStatus method from the controller, so removing this route too
         // If we need separate payment status update, we would add it back
+
+        // Appointment Diseases
+        Route::resource('appointment-diseases', Admin\AppointmentDiseaseController::class);
+        Route::resource('doctors', Admin\DoctorController::class);
+        
+        Route::get('home-h2-section', [\App\Http\Controllers\Admin\HomeH2SectionController::class, 'edit']);
+        Route::post('home-h2-section', [\App\Http\Controllers\Admin\HomeH2SectionController::class, 'update']);
+        
+        Route::get('about-clinic', [\App\Http\Controllers\Admin\AboutPageController::class, 'editClinic']);
+        Route::post('about-clinic', [\App\Http\Controllers\Admin\AboutPageController::class, 'updateClinic']);
+        Route::get('about-doctor', [\App\Http\Controllers\Admin\AboutPageController::class, 'editDoctor']);
+        Route::post('about-doctor', [\App\Http\Controllers\Admin\AboutPageController::class, 'updateDoctor']);
+
+        Route::get('contact-page', [\App\Http\Controllers\Admin\ContactPageController::class, 'edit']);
+        Route::post('contact-page', [\App\Http\Controllers\Admin\ContactPageController::class, 'update']);
 
         // Dynamic pages
         Route::resource('pages', PageController::class);
@@ -121,6 +137,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/ckeditor/upload', [GeneralController::class, 'ckeditorUpload'])->name('ckeditor.upload');
 
         // Blog
+        Route::resource('/blog-categories', Admin\BlogCategoryController::class);
         Route::resource('/blog', BlogController::class);
         // SEO
         Route::resource('gallery', Admin\GalleryController::class);

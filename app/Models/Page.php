@@ -11,6 +11,9 @@ class Page extends Model
 
     protected $guarded = [];
 
+    protected $casts = [
+        'faqs' => 'array',
+    ];
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id');

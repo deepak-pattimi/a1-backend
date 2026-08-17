@@ -22,18 +22,30 @@ class ImagegalleryController extends Controller
     }
 
 
-        public function store(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
-            'image' => 'required',
-            
+            'image' => 'required_without:image_file',
+            'image_file' => 'required_without:image|image|mimes:jpeg,png,jpg,gif,svg,webp|max:500',
         ]);
 
-        $data = [
-            'image' => $request->input('image'),
-            
-        ];
+        $data = [];
 
+        if ($request->hasFile('image_file')) {
+            $imageFile = $request->file('image_file');
+            $fileName = time() . '_' . $imageFile->getClientOriginalName();
+            $destinationPath = public_path('uploads/imagegallery');
+            
+            if (!file_exists($destinationPath)) {
+                mkdir($destinationPath, 0755, true);
+            }
+            
+            $imageFile->move($destinationPath, $fileName);
+
+            $data['image'] = '/uploads/imagegallery/' . $fileName;
+        } elseif ($request->image) {
+            $data['image'] = $request->image;
+        }
 
         Imagegallery::create($data);
 
@@ -48,21 +60,35 @@ class ImagegalleryController extends Controller
     }
 
 
-        public function update(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $request->validate([
-            'image' => 'required',
-            
+            'image' => 'nullable',
+            'image_file' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:500',
         ]);
 
-        $data = [
-            'image' => $request->input('image'),
-            
-        ];
+        $data = [];
 
+        if ($request->hasFile('image_file')) {
+            $imageFile = $request->file('image_file');
+            $fileName = time() . '_' . $imageFile->getClientOriginalName();
+            $destinationPath = public_path('uploads/imagegallery');
+            
+            if (!file_exists($destinationPath)) {
+                mkdir($destinationPath, 0755, true);
+            }
+            
+            $imageFile->move($destinationPath, $fileName);
+
+            $data['image'] = '/uploads/imagegallery/' . $fileName;
+        } elseif ($request->image) {
+            $data['image'] = $request->image;
+        }
 
         $item = Imagegallery::findOrFail($id);
-        $item->update($data);
+        if (!empty($data)) {
+            $item->update($data);
+        }
 
         return redirect()->route('imagegallery.index')->with('success', 'Record updated successfully.');
     }

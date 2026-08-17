@@ -40,7 +40,13 @@ class GeneralController extends Controller
             'footer_logo' => $request->footer_logo,
             'header_logo' => $request->header_logo,
             'favicon' =>    $request->favicon,
-            'about_image' => $request->about_image
+            'about_image' => $request->about_image,
+            'title' => $request->title,
+            'meta_description' => $request->meta_description,
+            'chatbot_welcome_message' => $request->chatbot_welcome_message,
+            'google_maps_url' => $request->google_maps_url,
+            'working_hours' => $request->working_hours,
+            'appointment_time_slots' => $request->appointment_time_slots
         ];
             GeneralSetting::where(['id' =>1])->update($data);
             return redirect()->back()->with('success', "Data has been updated");

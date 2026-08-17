@@ -37,13 +37,21 @@ Route::group(['prefix' => 'client'], function () {
 	Route::get('get-videogallery-list', [HomepageController::class, 'getVideogallery']);
 	// reviews
 	Route::get('get-reviews-list', [HomepageController::class, 'getReviews']);
+	Route::post('submit-review', [HomepageController::class, 'storeReview']);
+    
+    // testimonials
+    Route::get('get-testimonials-list', [HomepageController::class, 'getTestimonials']);
 
     // blogs
     Route::get('get-blogs-list', [HomepageController::class, 'getBlogs']);
     Route::get('get-blog-detail/{slug}', [HomepageController::class, 'getBlogDetail']);
     Route::post('like-blog/{id}', [HomepageController::class, 'likeBlog']);
 
-	
+    Route::get('get-appointment-diseases', [HomepageController::class, 'getAppointmentDiseases']);
+    Route::get('get-home-h2', [HomepageController::class, 'getHomeH2Section']);
+    Route::get('get-about-page', [HomepageController::class, 'getAboutPage']);
+    Route::get('get-contact-page', [HomepageController::class, 'getContactPage']);
+    Route::get('get-doctors', [HomepageController::class, 'getDoctors']);
     Route::post('appointment', [AppointmentController::class, 'storeAppointment']);
     Route::post('contact', [AppointmentController::class, 'storeContact']);
     // Add the missing update-payment-status route

@@ -40,7 +40,7 @@ class CategoryController extends Controller
 
         Category::create($data);
 
-        return redirect()->route('category.index')->with('success', 'Record created successfully.');
+        return redirect()->route('pages.index')->with('success', 'Record created successfully.');
     }
 
 
@@ -69,7 +69,7 @@ class CategoryController extends Controller
         $item = Category::findOrFail($id);
         $item->update($data);
 
-        return redirect()->route('category.index')->with('success', 'Record updated successfully.');
+        return redirect()->route('pages.index')->with('success', 'Record updated successfully.');
     }
 
 
@@ -79,6 +79,6 @@ class CategoryController extends Controller
         $item->delete();
 
 
-        return redirect()->route('category.index')->with('success', 'Record deleted successfully.');
+        return redirect()->route('pages.index')->with('success', 'Record deleted successfully.');
     }
 }

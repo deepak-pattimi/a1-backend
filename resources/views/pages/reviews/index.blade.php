@@ -5,8 +5,6 @@
 
         <h2>Reviews Records</h2>
 
-        <a href="{{ route('reviews.create') }}" class="btn btn-primary">Create New</a>
-
         <table class="table table-bordered">
 
         <thead>

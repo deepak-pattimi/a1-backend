@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use DataTables;
 use App\CPU\ImageManager;
 use App\Models\Blog;
+use App\Models\BlogCategory;
 use Illuminate\Support\Str;
 
 class BlogController extends Controller
@@ -22,7 +23,13 @@ class BlogController extends Controller
 
         if ($request->ajax()) {
 
-            $data = Blog::latest()->get();
+            $query = Blog::with('blogCategory')->latest();
+
+            if ($request->has('category_id') && !empty($request->category_id)) {
+                $query->where('blog_category_id', $request->category_id);
+            }
+
+            $data = $query->get();
 
             return Datatables::of($data)
                 ->addIndexColumn()
@@ -38,7 +45,8 @@ class BlogController extends Controller
                 ->make(true);
         }
 
-        return view('pages.blog.index');
+        $categories = BlogCategory::orderBy('name', 'asc')->get();
+        return view('pages.blog.index', compact('categories'));
     }
 
     /**
@@ -68,7 +76,9 @@ class BlogController extends Controller
             'twitter_card' => 'nullable|string|max:2048',
             'canonical' => 'nullable|max:2048',
             'og_local' => 'nullable|string|max:2048',
-            'category' => 'required|string|max:255',
+            'blog_category_id' => 'required',
+            'faqs' => 'nullable|array',
+            'category' => 'nullable|string|max:255',
             'tags' => 'nullable|string',
             'read_time' => 'nullable|string|max:255',
             'author_role' => 'nullable|string|max:255',
@@ -104,6 +114,8 @@ class BlogController extends Controller
             'twitter_card' => $request->twitter_card,
             'canonical' => $request->canonical,
             'og_local' => $request->og_local,
+            'blog_category_id' => $request->blog_category_id,
+            'faqs' => $request->faqs,
             'category' => $request->category,
             'tags' => $request->tags,
             'read_time' => $request->read_time,

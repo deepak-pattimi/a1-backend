@@ -36,10 +36,56 @@
                 </nav>
             </div>
         </div>
+    <div class="row mb-5">
+        <div class="col-md-12">
+            <h4 class="mb-3">Blog Categories</h4>
+            <a href="{{ route('blog-categories.create') }}" class="btn btn-primary mb-3"> Create New Category &nbsp; <i class="fa fa-plus"></i></a>
+            <div class="card p-3">
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Slug</th>
+                                <th>Order</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($categories as $item)
+                            <tr>
+                                <td>{{ $item->id }}</td>
+                                <td>{{ $item->name }}</td>
+                                <td>{{ $item->slug }}</td>
+                                <td>{{ $item->order_no }}</td>
+                                <td>
+                                    <a href="{{ route('blog-categories.edit', $item->id) }}" class="btn btn-info btn-sm" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pen"></i></a>
+                                    <button class="btn btn-danger btn-sm deleteCategory" data-id="{{ $item->id }}" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
+
     <div class="row">
         <div class="col-md-12">
-            <a class="btn btn-primary mb-3" href="javascript:void(0)" id="createNewProduct"> Create new article &nbsp; <i class="fa fa-plus"></i></a>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <a class="btn btn-primary" href="javascript:void(0)" id="createNewProduct"> Create new article &nbsp; <i class="fa fa-plus"></i></a>
+                <div class="form-inline">
+                    <label class="mr-2 font-weight-bold">Filter by Category:</label>
+                    <select id="category_filter" class="form-control" style="width: 250px;">
+                        <option value="">All Categories</option>
+                        @foreach($categories as $cat)
+                            <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
             <div class="card p-3">
                 <div class="card-body">
                     <table class="table table-bordered data-table">
@@ -76,22 +122,13 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="category" class="col-sm-6 control-label">Category</label>
+                            <label for="blog_category_id" class="col-sm-6 control-label">Blog Category</label>
                             <div class="col-sm-12">
-                                <select class="form-control" id="category" name="category" required>
+                                <select class="form-control" id="blog_category_id" name="blog_category_id" required>
                                     <option value="">Select Category</option>
-                                    <option value="Health Tips">Health Tips</option>
-                                    <option value="Medical News">Medical News</option>
-                                    <option value="Patient Stories">Patient Stories</option>
-                                    <option value="Wellness">Wellness</option>
-                                    <option value="Treatments">Treatments</option>
-                                    <option value="Events">Events</option>
-                                    <option value="Nutrition">Nutrition</option>
-                                    <option value="Mental Health">Mental Health</option>
-                                    <option value="Cardiology">Cardiology</option>
-                                    <option value="Orthopedics">Orthopedics</option>
-                                    <option value="Gynecology">Gynecology</option>
-                                    <option value="Pediatrics">Pediatrics</option>
+                                    @foreach($categories as $categoryItem)
+                                        <option value="{{ $categoryItem->id }}">{{ $categoryItem->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -108,119 +145,23 @@
                             </div>
                         </div>
 
+                        <!-- FAQs Section -->
+                        <div class="form-group">
+                            <label class="col-sm-6 control-label">FAQs (Optional)</label>
+                            <div class="col-sm-12">
+                                <div id="faqs-container">
+                                    <!-- FAQs will be dynamically inserted here -->
+                                </div>
+                                <button type="button" class="btn btn-secondary mt-2" id="add-faq-btn">
+                                    <i class="fa fa-plus"></i> Add FAQ
+                                </button>
+                            </div>
+                        </div>
+                        <!-- End FAQs Section -->
 
 
-                        <div class="form-group ">
-                        <label for="meta_title" class="col-sm-6 control-label">Meta Title</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" id="meta_title" name="meta_title"
-                                     required="true">
-                            </div>
-                        </div>
 
 
-
-                        <div class="form-group ">
-                        <label for="meta_description" class="col-sm-6 control-label">Meta Description</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" id="meta_description" name="meta_description"
-                                     required="true">
-                            </div>
-                        </div>
-
-                        <div class="form-group ">
-                            <label for="meta_keywords" class="col-sm-6 control-label">Meta Keywords</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" id="meta_keywords" name="meta_keywords"
-                                     required="true">
-                            </div>
-                        </div>
-
-                        <div class="form-group ">
-                            <label for="meta_author" class="col-sm-6 control-label">Meta Author</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" id="meta_author" name="meta_author"
-                                   required="true">
-                            </div>
-                        </div>
-
-                        <div class="form-group ">
-                            <label for="meta_robots" class="col-sm-6 control-label">Meta Robots</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" id="meta_robots" value="index,follow" name="meta_robots"
-                                     required="true">
-                            </div>
-                        </div>
-
-                        <div class="form-group ">
-                            <label for="og_title" class="col-sm-6 control-label">OG Title</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" id="og_title" name="og_title"  required="true">
-                            </div>
-                        </div>
-                        <div class="form-group ">
-                            <label for="og_description" class="col-sm-6 control-label">OG Description</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" id="og_description" name="og_description"  required="true">
-                            </div>
-                        </div>
-                        <div class="form-group ">
-                            <label for="og_image" class="col-sm-6 control-label">OG Image URL</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" id="og_image" name="og_image"  required="true">
-                            </div>
-                        </div>
-                        <div class="form-group ">
-                            <label for="og_url" class="col-sm-6 control-label">OG URL</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" id="og_url" name="og_url"  required="true">
-                            </div>
-                        </div>
-
-                        <div class="form-group ">
-                            <label for="og_type" class="col-sm-6 control-label">OG Type</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" id="og_type" name="og_type"  required="true">
-                            </div>
-                        </div>
-                        
-                        <div class="form-group ">
-                            <label for="twitter_title" class="col-sm-6 control-label">Twitter Title</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" id="twitter_title" name="twitter_title" required="true">
-                            </div>
-                        </div>
-                        <div class="form-group ">
-                            <label for="twitter_description" class="col-sm-6 control-label">Twitter Description</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" id="twitter_description" name="twitter_description"  required="true">
-                            </div>
-                        </div>
-                        <div class="form-group ">
-                            <label for="twitter_image" class="col-sm-6 control-label">Twitter Image</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" id="twitter_image" name="twitter_image"  required="true">
-                            </div>
-                        </div>
-                        <div class="form-group ">
-                            <label for="twitter_card" class="col-sm-6 control-label">Twitter Card</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" id="twitter_card" name="twitter_card"  required="true">
-                            </div>
-                        </div>
-
-                        <div class="form-group ">
-                            <label for="canonical" class="col-sm-6 control-label">Canonical</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" id="canonical" name="canonical" required="true">
-                            </div>
-                        </div>
-                        <div class="form-group ">
-                            <label for="og_local" class="col-sm-6 control-label">OG Local</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" id="og_local" name="og_local" required="true">
-                            </div>
-                        </div>
                     <div class="conatiner">
                     <div class="row">
                         <div class="col-md-6">
@@ -262,10 +203,23 @@
         var table = $('.data-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('blog.index') }}",
+            ajax: {
+                url: "{{ route('blog.index') }}",
+                data: function (d) {
+                    d.category_id = $('#category_filter').val();
+                }
+            },
             columns: [
                 {title: 'SNO', data: 'DT_RowIndex', name: 'DT_RowIndex'},
                 {title: 'Blog Title', data: 'blog_title', name: 'blog_title'},
+                {
+                    title: 'Category', 
+                    data: 'blog_category', 
+                    name: 'blogCategory.name',
+                    render: function(data, type, full, meta) {
+                        return data ? data.name : 'N/A';
+                    }
+                },
                 {
                     title: 'Status',
                     data: 'status',
@@ -292,6 +246,10 @@
 
         });
 
+        $('#category_filter').change(function(){
+            table.draw();
+        });
+
         /*------------------------------------------
         --------------------------------------------
         Click to Button
@@ -305,6 +263,7 @@
             $('#modelHeading').html("Create new blog");
             $('#ajaxModel').modal('show');
             $('#saveBtn').html('Save Changes');
+            $('#faqs-container').empty();
 
 
             $('input[name="blog_image"]').val(''); 
@@ -325,28 +284,21 @@
                 $('#ajaxModel').modal('show');
                 $('#item_id').val(data.id);
                 $('#blog_title').val(data.blog_title);
+                $('#blog_category_id').val(data.blog_category_id);
                 $('#category').val(data.category);
                 $('#tags').val(data.tags);
                 $('#read_time').val(data.read_time);
                 $('#author_role').val(data.author_role);
-                // For author_image we can't easily set value on file input, but might need to handle preview if implemented
+                
+                // Clear and render FAQs
+                $('#faqs-container').empty();
+                if (data.faqs && Array.isArray(data.faqs) && data.faqs.length > 0) {
+                    data.faqs.forEach(function(faq, index) {
+                        appendFaqField(index, faq.question, faq.answer);
+                    });
+                }
 
-                $('#meta_title').val(data.meta_title);
-                $('#meta_description').val(data.meta_description);
-                $('#meta_keywords').val(data.meta_keywords);
-                $('#meta_author').val(data.meta_author);
-                $('#meta_robots').val(data.meta_robots);
-                $('#og_title').val(data.og_title);
-                $('#og_description').val(data.og_description);
-                $('#og_image').val(data.og_image);
-                $('#og_url').val(data.og_url);
-                $('#og_type').val(data.og_type);
-                $('#twitter_title').val(data.twitter_title);
-                $('#twitter_description').val(data.twitter_description);
-                $('#twitter_image').val(data.twitter_image);
-                $('#twitter_card').val(data.twitter_card);
-                $('#canonical').val(data.canonical);
-                $('#og_local').val(data.og_local);
+
 
                 $('#preview-blog_image').html(
                     `<div class="position-relative" style="display: inline-block;">
@@ -377,6 +329,26 @@
             
             var formdata = new FormData(document.getElementById('packageForm'));
             formdata.append('blog_content', blog_content);
+            
+            // Gather FAQs
+            var faqs = [];
+            $('.faq-item').each(function() {
+                var q = $(this).find('.faq-question').val();
+                var a = $(this).find('.faq-answer').val();
+                if (q && a) {
+                    faqs.push({ question: q, answer: a });
+                }
+            });
+            // Append array as JSON or separate elements, since formData can handle arrays differently.
+            // Let's loop and append as indexed array so Laravel understands it
+            if (faqs.length > 0) {
+                faqs.forEach((faq, index) => {
+                    formdata.append(`faqs[${index}][question]`, faq.question);
+                    formdata.append(`faqs[${index}][answer]`, faq.answer);
+                });
+            } else {
+                formdata.append('faqs', '');
+            }
             
             $.ajax({
                 enctype: 'multipart/form-data',
@@ -445,7 +417,62 @@
 
         });
         
+        $('body').on('click', '.deleteCategory', function () {
+            var item_id = $(this).data("id");
+            swal({
+                title: `Are you sure you want to delete this category?`,
+                text: "If you delete this, it will be gone forever.",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        type: "DELETE",
+                        url: "{{ url('admin/blog-categories') }}" + '/' + item_id,
+                        success: function (data) {
+                            location.reload(); 
+                        },
+                        error: function (response) {
+                            location.reload(); 
+                        }
+                    });
+                }
+            });
+        });
+        
 
+    });
+    
+    // FAQ logic
+    var faqIndex = 0;
+    
+    function appendFaqField(index, question = '', answer = '') {
+        var faqHtml = `
+            <div class="faq-item mb-3 border p-3 rounded position-relative">
+                <button type="button" class="btn btn-danger btn-sm remove-faq-btn position-absolute" style="top: 10px; right: 10px;">
+                    <i class="fa fa-times"></i>
+                </button>
+                <div class="form-group mb-2">
+                    <label>Question</label>
+                    <input type="text" class="form-control faq-question" value="${question}" placeholder="Enter question">
+                </div>
+                <div class="form-group mb-0">
+                    <label>Answer</label>
+                    <textarea class="form-control faq-answer" rows="3" placeholder="Enter answer">${answer}</textarea>
+                </div>
+            </div>
+        `;
+        $('#faqs-container').append(faqHtml);
+    }
+    
+    $('#add-faq-btn').click(function() {
+        appendFaqField(faqIndex);
+        faqIndex++;
+    });
+    
+    $(document).on('click', '.remove-faq-btn', function() {
+        $(this).closest('.faq-item').remove();
     });
 
 

@@ -12,7 +12,6 @@
         <thead>
 <tr>
 <th>ID</th>
-<th>Thumbnail</th>
 <th>Youtubelink</th>
 <th>Actions</th>
 </tr>
@@ -23,28 +22,6 @@
 <tr>
 
         <td>{{ $item->id }}</td>
-
-                    @php
-                        // Get file extension
-                        $fileExtension = pathinfo($item->thumbnail, PATHINFO_EXTENSION);
-                        
-                        // Determine file type
-                        $isImage = in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif']);
-                        $isVideo = in_array($fileExtension, ['mp4', 'webm', 'ogg']);
-                    @endphp
-                
-                    @if($isImage)
-                        <td><img src="{{ $item->thumbnail }}" style="height: 50px; object-fit: cover;" /></td>
-                    @elseif($isVideo)
-                        <td>
-                            <video width="100" height="50" controls>
-                                <source src="{{ $item->thumbnail }}" type="video/{{ $fileExtension }}">
-                                Your browser does not support the video tag.
-                            </video>
-                        </td>
-                    @else
-                        <td>{{ $item->thumbnail }}</td>
-                    @endif
                <td>
     @php
         $videoId = null;

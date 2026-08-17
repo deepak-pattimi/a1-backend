@@ -49,4 +49,13 @@
             e.stopImmediatePropagation();
         }
     });
+
+    // Global fix to ensure all CKEditors update their corresponding textareas on form submit
+    window.addEventListener('submit', function (e) {
+        if (typeof CKEDITOR !== 'undefined') {
+            for (var instanceName in CKEDITOR.instances) {
+                CKEDITOR.instances[instanceName].updateElement();
+            }
+        }
+    }, true); // The 'true' uses the capture phase so it runs before ANY other submit handlers
 </script>

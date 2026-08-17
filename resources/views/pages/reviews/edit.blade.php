@@ -22,7 +22,7 @@
 <div class="form-group row">
     <label for="content" class="col-sm-2 col-form-label">Content</label>
     <div class="col-sm-10">
-        <x-ckeditor name="content" id="content" :value="$item->content" />
+        <textarea name="content" id="content" class="form-control" rows="5">{{ $item->content }}</textarea>
     </div>
 </div>
 <div class="form-group row">

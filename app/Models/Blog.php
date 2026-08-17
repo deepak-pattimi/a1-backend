@@ -30,6 +30,8 @@ class Blog extends Model
         'canonical',
         'og_local',
         'status',
+        'blog_category_id',
+        'faqs',
         'category',
         'tags',
         'read_time',
@@ -38,4 +40,13 @@ class Blog extends Model
         'author_role',
         'author_image'
     ];
+
+    protected $casts = [
+        'faqs' => 'array',
+    ];
+
+    public function blogCategory()
+    {
+        return $this->belongsTo(BlogCategory::class, 'blog_category_id');
+    }
 }

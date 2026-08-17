@@ -39,18 +39,13 @@
             <x-image-input name="header_logo" columns="col-md-3" value="{{ $general->header_logo }}" label="Header Logo" />
             <x-image-input name="footer_logo" columns="col-md-3" value="{{ $general->footer_logo }}" label="Footer Logo" />
             <x-image-input name="favicon" columns="col-md-3" value="{{ $general->favicon }}" label="Favicon" />
-            <x-image-input name="about_image" columns="col-md-3" value="{{ $general->about_image }}" label="About Us Image" />
-            
+
             <div class="form-group col-md-3">
                 <label for="header_phone">Header Phone</label>
                 <input type="number" class="form-control" id="header_phone" name="header_phone" value="{{$general->header_phone}}"
                     placeholder="Header Phone" />
             </div>
-            <div class="form-group col-md-3">
-                <label for="header_email">Header Email</label>
-                <input type="email" class="form-control" id="header_email" name="header_email" value="{{$general->header_email}}"
-                    placeholder="Header Email" />
-            </div>
+
 
             <!-- Social Media Section -->
             <div class="form-group col-md-3">
@@ -61,32 +56,48 @@
                 <label for="insta_link">Instagram Link</label>
                 <input type="url" class="form-control" id="insta_link" name="insta_link" placeholder="Instagram Link" value="{{$general->insta_link}}" />
             </div>
-            <div class="form-group col-md-3">
-                <label for="twitter_link">Twitter Link</label>
-                <input type="url" class="form-control" id="twitter_link" name="twitter_link" value="{{$general->twitter_link}}"
-                    placeholder="Twitter Link" />
-            </div>
-            <div class="form-group col-md-3">
-                <label for="pintrest_link">Pinterest Link</label>
-                <input type="url" class="form-control" id="pintrest_link" name="pintrest_link" value="{{$general->pintrest_link}}"
-                    placeholder="Pinterest Link" />
-            </div>
+
             <div class="form-group col-md-3">
                 <label for="youtube_link">YouTube Link</label>
                 <input type="url" class="form-control" id="youtube_link" name="youtube_link" value="{{$general->youtube_link}}"
                     placeholder="YouTube Link" />
             </div>
-            <div class="form-group col-md-3">
-                <label for="linkdin_link">LinkedIn Link</label>
-                <input type="url" class="form-control" id="linkdin_link" name="linkdin_link" value="{{$general->linkdin_link}}"
-                    placeholder="LinkedIn Link" />
-            </div>
+
 
             <!-- Contact Section -->
             <div class="form-group col-md-3">
                 <label for="whatsapp_no">WhatsApp Number</label>
                 <input type="number" class="form-control" id="whatsapp_no" name="whatsapp_no" value="{{$general->whatsapp_no}}"
                     placeholder="WhatsApp Number" />
+            </div>
+
+            <div class="col-12 mt-3">
+                <hr>
+                <h6 class="mb-3">Chatbot & Location Settings</h6>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="chatbot_welcome_message">Chatbot Welcome Message</label>
+                <input type="text" class="form-control" id="chatbot_welcome_message" name="chatbot_welcome_message" value="{{$general->chatbot_welcome_message}}"
+                    placeholder="e.g. Welcome to the Hospital. How can I help you today?" />
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="google_maps_url">Google Maps URL</label>
+                <input type="url" class="form-control" id="google_maps_url" name="google_maps_url" value="{{$general->google_maps_url}}"
+                    placeholder="https://maps.google.com/..." />
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="working_hours">Working Hours</label>
+                <input type="text" class="form-control" id="working_hours" name="working_hours" value="{{$general->working_hours}}"
+                    placeholder="e.g. 24/7 Emergency Care" />
+            </div>
+
+            <div class="form-group col-md-12">
+                <label for="appointment_time_slots">Appointment Time Slots (Comma Separated)</label>
+                <input type="text" class="form-control" id="appointment_time_slots" name="appointment_time_slots" value="{{$general->appointment_time_slots}}"
+                    placeholder="e.g. 11:00 AM - 02:00 PM, 05:00 PM - 06:00 PM" />
             </div>
 
             <!-- Footer Section -->
@@ -108,12 +119,24 @@
             </div>
 
             <!-- Website Section -->
-            <div class="form-group col-md-3">
-                <label for="website_name">Website Name</label>
-                <input type="text" class="form-control" id="website_name" name="website_name" value="{{$general->website_name}}"
-                    placeholder="Website Name" />
+
+
+            <div class="col-12 mt-3">
+                <hr>
+                <h6 class="mb-3">SEO Settings</h6>
             </div>
             
+            <div class="form-group col-md-12">
+                <label for="title">Home Page Title</label>
+                <input type="text" class="form-control" id="title" name="title" value="{{$general->title}}"
+                    placeholder="Enter Home Page Title" />
+            </div>
+            
+            <div class="form-group col-md-12">
+                <label for="meta_description">Home Page Meta Description</label>
+                <textarea class="form-control" id="meta_description" name="meta_description" rows="3"
+                    placeholder="Enter Meta Description">{{$general->meta_description}}</textarea>
+            </div>
 
             <!-- Submit Button -->
             <div class="text-center col-12 mt-2">

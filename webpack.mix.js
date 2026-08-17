@@ -13,7 +13,7 @@ mix.styles([
     'public/plugins/DataTables/datatables.min.css',
     'public/plugins/tempusdominus-bootstrap-4/build/css/tempusdominus-bootstrap-4.min.css'
 ], 'public/css/all.css') // Save the combined file in 'public/css/all.css'
-    .postCss('public/css/all.css', 'public/css') // Process the combined CSS file
+    .postCss('./public/css/all.css', 'public/css') // Process the combined CSS file
     .purgeCss({
         content: [
             'resources/views/**/*.blade.php',
@@ -38,4 +38,7 @@ mix.scripts([
     'public/plugins/moment/moment.js',
     'public/plugins/tempusdominus-bootstrap-4/build/js/tempusdominus-bootstrap-4.min.js',
     'public/plugins/datedropper/datedropper.min.js'
-], 'public/js/all.js');
+], 'public/js/all.js')
+    .options({
+        processCssUrls: false
+    });

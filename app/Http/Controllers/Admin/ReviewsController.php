@@ -28,7 +28,7 @@ class ReviewsController extends Controller
             'name' => 'required',
             'rating' => 'required',
             'content' => 'required',
-            'image' => 'required',
+            'image' => 'nullable',
             
         ]);
 
@@ -60,7 +60,7 @@ class ReviewsController extends Controller
             'name' => 'required',
             'rating' => 'required',
             'content' => 'required',
-            'image' => 'required',
+            'image' => 'nullable',
             
         ]);
 
