@@ -95,6 +95,12 @@
             </div>
 
             <div class="form-group col-md-12">
+                <label for="address">Hospital Address</label>
+                <textarea class="form-control" id="address" name="address" rows="3"
+                    placeholder="Enter Hospital Address">{{$general->address}}</textarea>
+            </div>
+
+            <div class="form-group col-md-12">
                 <label for="appointment_time_slots">Appointment Time Slots (Comma Separated)</label>
                 <input type="text" class="form-control" id="appointment_time_slots" name="appointment_time_slots" value="{{$general->appointment_time_slots}}"
                     placeholder="e.g. 11:00 AM - 02:00 PM, 05:00 PM - 06:00 PM" />

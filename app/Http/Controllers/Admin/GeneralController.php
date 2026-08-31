@@ -46,7 +46,8 @@ class GeneralController extends Controller
             'chatbot_welcome_message' => $request->chatbot_welcome_message,
             'google_maps_url' => $request->google_maps_url,
             'working_hours' => $request->working_hours,
-            'appointment_time_slots' => $request->appointment_time_slots
+            'appointment_time_slots' => $request->appointment_time_slots,
+            'address' => $request->address
         ];
             GeneralSetting::where(['id' =>1])->update($data);
             return redirect()->back()->with('success', "Data has been updated");
