@@ -21,10 +21,13 @@ use App\Http\Controllers\Admin\DynamicCrudController;
 use App\Http\Controllers\Admin\AppointmentController;
 use App\Http\Controllers\Admin\PageDynamicItemController;
 
+Route::get('/sitemap.xml', \App\Http\Controllers\Frontend\SitemapController::class);
 Route::get('/', [LoginController::class, 'showLoginForm'])->name('admin.login');
+Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 
 Route::group(['prefix' => 'admin'], function () {
-    Route::get('/', [LoginController::class, 'showLoginForm'])->name('admin.login');
+    Route::get('/', [LoginController::class, 'showLoginForm']);
+    Route::get('login', [LoginController::class, 'showLoginForm']);
     // Authentication Routes
     Route::post('login', [LoginController::class, 'login']);
     Route::get('/logout', [LoginController::class, 'logout']);
@@ -139,8 +142,6 @@ Route::group(['prefix' => 'admin'], function () {
         // Blog
         Route::resource('/blog-categories', Admin\BlogCategoryController::class);
         Route::resource('/blog', BlogController::class);
-        // SEO
-        Route::resource('gallery', Admin\GalleryController::class);
         Route::resource('/seo', SeoController::class);
         Route::get('/create-dynamic-crud', [DynamicCrudController::class, 'create'])->name('dynamic.crud.create');
         Route::post('/dynamic-crud/store', [DynamicCrudController::class, 'store'])->name('dynamic.crud.store');

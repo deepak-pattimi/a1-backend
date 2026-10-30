@@ -6,6 +6,9 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\HomepageController;
 use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\AppointmentController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\RolesController;
+use App\Http\Controllers\PermissionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,8 +26,9 @@ Route::get('/unauthenticated', function () {
 Route::post('login', [AuthController::class,'login']);
 
 
-// Frontend api's
-Route::group(['prefix' => 'client'], function () {
+// Frontend api's with DDoS & rate-limiting protection (120 requests/minute per client)
+Route::group(['prefix' => 'client', 'middleware' => ['throttle:120,1']], function () {
+	Route::get('get-homepage-data', [HomepageController::class, 'getHomepageData']);
 	Route::get('get-banners-list', [HomepageController::class, 'getBanners']);
 	Route::post('contact-submit', [ContactController::class, 'submit_request']);
 

@@ -41,7 +41,6 @@ return new class extends Migration
             $table->string('category')->nullable();
             $table->text('tags')->nullable();
             $table->string('read_time')->nullable();
-            $table->string('read_time')->nullable();
             $table->integer('views')->default(0);
             $table->integer('likes')->default(0);
             $table->string('author_role')->nullable();

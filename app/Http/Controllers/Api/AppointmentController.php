@@ -17,17 +17,19 @@ class AppointmentController extends Controller
         try {
             Log::info('Fetching dashboard statistics');
             
-            // Get payment statistics
-            $onlinePayments = Appointment::where('payment_method', 'online')
-                                        ->where('payment_status', 'completed')
-                                        ->sum('amount');
-            
-            $offlinePayments = Appointment::where('payment_method', 'offline')
-                                         ->where('payment_status', 'completed')
-                                         ->sum('amount');
-            
-            $totalAppointments = Appointment::count();
-            $pendingAppointments = Appointment::where('status', 'pending')->count();
+            // Read all totals in one query, without loading appointment records.
+            $stats = Appointment::query()->selectRaw(
+                "COUNT(*) AS total_appointments,
+                COALESCE(SUM(CASE WHEN status = ? THEN 1 ELSE 0 END), 0) AS pending_appointments,
+                COALESCE(SUM(CASE WHEN payment_method = ? AND payment_status = ? THEN amount ELSE 0 END), 0) AS online_payments,
+                COALESCE(SUM(CASE WHEN payment_method = ? AND payment_status = ? THEN amount ELSE 0 END), 0) AS offline_payments",
+                ['pending', 'online', 'completed', 'offline', 'completed']
+            )->first();
+
+            $onlinePayments = $stats->online_payments;
+            $offlinePayments = $stats->offline_payments;
+            $totalAppointments = (int) $stats->total_appointments;
+            $pendingAppointments = (int) $stats->pending_appointments;
 
             Log::info('Dashboard statistics fetched successfully', [
                 'online_payments' => $onlinePayments,

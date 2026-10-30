@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('general_settings', function (Blueprint $table) {
-            $table->string('about_image')->nullable()->after('header_logo');
-        });
+        if (!Schema::hasColumn('general_settings', 'about_image')) {
+            Schema::table('general_settings', function (Blueprint $table) {
+                $table->string('about_image')->nullable()->after('header_logo');
+            });
+        }
     }
 
     /**

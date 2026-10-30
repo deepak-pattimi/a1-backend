@@ -24,7 +24,11 @@ class PageController extends Controller
 
         if ($request->ajax()) {
 
-            $query = Page::latest()->with('category');
+            $query = Page::select('id', 'page_name', 'slug', 'category_id', 'created_at')
+                ->with(['category' => function ($q) {
+                    $q->select('id', 'name');
+                }])
+                ->latest();
 
             if ($request->has('category_id') && !empty($request->category_id)) {
                 $query->where('category_id', $request->category_id);

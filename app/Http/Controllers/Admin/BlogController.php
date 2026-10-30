@@ -23,7 +23,11 @@ class BlogController extends Controller
 
         if ($request->ajax()) {
 
-            $query = Blog::with('blogCategory')->latest();
+            $query = Blog::select('id', 'blog_title', 'blog_image', 'blog_category_id', 'category', 'status', 'created_at')
+                ->with(['blogCategory' => function ($q) {
+                    $q->select('id', 'name');
+                }])
+                ->latest();
 
             if ($request->has('category_id') && !empty($request->category_id)) {
                 $query->where('blog_category_id', $request->category_id);
