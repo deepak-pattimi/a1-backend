@@ -203,7 +203,7 @@ class AppointmentController extends Controller
                     'payment_method' => $request->payment_method,
                     'transaction_id' => $appointment->transaction_id,
                     'razorpay_order_id' => $razorpayOrder['id'],
-                    'razorpay_key_id' => env('RAZORPAY_KEY_ID', 'rzp_test_T4AraVExlu3Idf'),
+                    'razorpay_key_id' => env('RAZORPAY_KEY_ID'),
                     'amount' => $razorpayOrder['amount']
                 ];
 

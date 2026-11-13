@@ -18,8 +18,8 @@ class Payment
                 'razorpay_key_secret_configured' => !empty(env('RAZORPAY_KEY_SECRET'))
             ]);
             
-            $razorpay_key_id = env('RAZORPAY_KEY_ID', 'rzp_test_T4AraVExlu3Idf');
-            $razorpay_key_secret = env('RAZORPAY_KEY_SECRET', 'IbL6yVAfWAx4F1l7S1gZCVuT');
+            $razorpay_key_id = env('RAZORPAY_KEY_ID');
+            $razorpay_key_secret = env('RAZORPAY_KEY_SECRET');
 
             Log::info('Razorpay credentials', [
                 'key_id' => $razorpay_key_id,
@@ -79,8 +79,8 @@ class Payment
                 return false;
             }
             
-            $razorpay_key_id = env('RAZORPAY_KEY_ID', 'rzp_test_T4AraVExlu3Idf');
-            $razorpay_key_secret = env('RAZORPAY_KEY_SECRET', 'IbL6yVAfWAx4F1l7S1gZCVuT');
+            $razorpay_key_id = env('RAZORPAY_KEY_ID');
+            $razorpay_key_secret = env('RAZORPAY_KEY_SECRET');
             
             Log::info('Using Razorpay credentials for verification', [
                 'key_id' => $razorpay_key_id
