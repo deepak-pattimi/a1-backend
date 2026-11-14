@@ -131,6 +131,20 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label for="meta_title" class="col-sm-6 control-label">Meta Title</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="meta_title" name="meta_title" placeholder="Enter Meta Title (Optional)">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="meta_description" class="col-sm-6 control-label">Meta Description</label>
+                        <div class="col-sm-12">
+                            <textarea class="form-control" id="meta_description" name="meta_description" rows="3" placeholder="Enter Meta Description (Optional)"></textarea>
+                        </div>
+                    </div>
+
                         <div class="form-group ">
                             <label  class="col-sm-6 control-label">Content (EN)</label>
                             <div class="col-sm-12">
@@ -245,6 +259,8 @@
         $('#createNewPage').click(function () {
             $('#pageForm')[0].reset();
             $('#item_id').val('');
+            $('#meta_title').val('');
+            $('#meta_description').val('');
             $('#formErrors').addClass('d-none').html('');
             $('#modelHeading').html("Create New Page");
             $('#ajaxModel').modal('show');
@@ -271,6 +287,8 @@
 
                 $('#item_id').val(data.id);
                 $('#page_name').val(data.page_name);
+                $('#meta_title').val(data.meta_title ?? '');
+                $('#meta_description').val(data.meta_description ?? '');
                 $('#category_id').val(data.category_id);
 
                 if (CKEDITOR.instances['content']) {

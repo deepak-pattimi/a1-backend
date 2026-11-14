@@ -68,6 +68,8 @@ class PageController extends Controller
             'content' => 'required|string',
             'category_id' => 'required',
             'faqs' => 'nullable|array',
+            'meta_title' => 'nullable|string|max:255',
+            'meta_description' => 'nullable|string',
         ];
 
         file_put_contents(storage_path('logs/debug.txt'), json_encode($request->all()));
@@ -80,6 +82,8 @@ class PageController extends Controller
             'content' => $request->content,
             'category_id' => $request->category_id,
             'faqs' => $request->faqs,
+            'meta_title' => $request->meta_title,
+            'meta_description' => $request->meta_description,
         ];
 
     
