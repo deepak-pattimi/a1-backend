@@ -87,9 +87,17 @@ class HomepageController extends Controller
     // appointment diseases api
     public function getAppointmentDiseases()
     {
-        return $this->cachedResponse('client_appointment_diseases', 600, function () {
+        if (request()->query('refresh') || request()->query('_t')) {
+            Cache::forget('client_appointment_diseases');
+        }
+
+        $diseases = Cache::remember('client_appointment_diseases', 60, function () {
             return \App\Models\AppointmentDisease::where('status', 1)->get();
         });
+
+        return response()->json($diseases, 200, [
+            'Cache-Control' => 'no-cache, must-revalidate, no-store',
+        ]);
     }
 
     // home h2 section api

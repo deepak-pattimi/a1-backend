@@ -16,6 +16,11 @@ class BlogCategoryController extends Controller
         return view('pages.blog-categories.index', compact('items'));
     }
 
+    public function show($id)
+    {
+        return redirect()->route('blog-categories.index');
+    }
+
     public function create()
     {
         return view('pages.blog-categories.create');

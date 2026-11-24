@@ -14,6 +14,11 @@ class AppointmentDiseaseController extends Controller
         return view('pages.appointment_diseases.index', compact('diseases'));
     }
 
+    public function show($id)
+    {
+        return redirect()->route('appointment-diseases.index');
+    }
+
     public function create()
     {
         return view('pages.appointment_diseases.create');
