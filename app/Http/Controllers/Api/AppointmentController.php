@@ -135,6 +135,9 @@ class AppointmentController extends Controller
                     'appointment_id' => $appointment->id
                 ]);
 
+                // Send tabular email notification for offline appointment
+                $this->sendAppointmentNotificationEmail($appointment);
+
                 $responseData = [
                     'status' => 200,
                     'message' => 'Appointment booked successfully!',
@@ -331,6 +334,11 @@ class AppointmentController extends Controller
             
             $appointment->save();
             
+            // Send tabular email notification upon successful Razorpay payment
+            if ($request->payment_status === 'completed') {
+                $this->sendAppointmentNotificationEmail($appointment);
+            }
+            
             Log::info('Payment status updated successfully', [
                 'appointment_id' => $appointment->id,
                 'old_payment_status' => $oldPaymentStatus,
@@ -442,6 +450,11 @@ class AppointmentController extends Controller
             $appointment->payment_status = $request->payment_status;
             $appointment->save();
             
+            // Send tabular email notification upon successful Razorpay payment
+            if ($request->payment_status === 'completed') {
+                $this->sendAppointmentNotificationEmail($appointment);
+            }
+            
             Log::info('Payment status updated successfully', [
                 'appointment_id' => $appointment->id,
                 'payment_status' => $request->payment_status
@@ -518,6 +531,32 @@ class AppointmentController extends Controller
                 'status' => 500,
                 'message' => 'Something went wrong!'
             ], 500);
+        }
+    }
+
+    /**
+     * Send tabular appointment notification email via SMTP.
+     *
+     * @param  \App\Models\Appointment  $appointment
+     * @return void
+     */
+    protected function sendAppointmentNotificationEmail($appointment)
+    {
+        try {
+            $recipient = env('NOTIFICATION_RECIPIENT_EMAIL', 'a1hospitaldm@gmail.com');
+            \Illuminate\Support\Facades\Mail::to($recipient)->send(new \App\Mail\AppointmentNotificationMail($appointment));
+            Log::info('Appointment notification email sent successfully', [
+                'appointment_id' => $appointment->id,
+                'recipient' => $recipient,
+                'payment_method' => $appointment->payment_method,
+                'payment_status' => $appointment->payment_status
+            ]);
+        } catch (\Exception $e) {
+            Log::error('Failed to send appointment notification email: ' . $e->getMessage(), [
+                'appointment_id' => $appointment->id,
+                'file' => $e->getFile(),
+                'line' => $e->getLine()
+            ]);
         }
     }
 }
