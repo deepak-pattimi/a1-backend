@@ -39,6 +39,11 @@ class BlogCategoryController extends Controller
         return redirect('admin/blog')->with('success', 'Blog category created successfully.');
     }
 
+    public function show($id)
+    {
+        return redirect()->route('blog-categories.edit', $id);
+    }
+
     public function edit($id)
     {
         $item = BlogCategory::findOrFail($id);

@@ -258,17 +258,20 @@
         $('#createNewProduct').click(function () {
             $('#packageForm').trigger("reset");
             $('#saveBtn').val("create-product");
+            $('#saveBtn').html('Save Changes').prop('disabled', false);
             $('#item_id').val('');
-            $('#packageForm').trigger("reset");
             $('#modelHeading').html("Create new blog");
             $('#ajaxModel').modal('show');
-            $('#saveBtn').html('Save Changes');
             $('#faqs-container').empty();
-
 
             $('input[name="blog_image"]').val(''); 
             $('#preview-blog_image').html('');
-    
+
+            if (typeof CKEDITOR !== 'undefined' && CKEDITOR.instances && CKEDITOR.instances['blog_content']) {
+                CKEDITOR.instances['blog_content'].setData('');
+            } else {
+                $('#blog_content').val('');
+            }
         });
 
         /*------------------------------------------
@@ -281,6 +284,7 @@
             $.get("{{ route('blog.index') }}" + '/' + item_id + '/edit', function (data) {
                 $('#modelHeading').html("Edit article");
                 $('#saveBtn').val("edit-user");
+                $('#saveBtn').html('Save Changes').prop('disabled', false);
                 $('#ajaxModel').modal('show');
                 $('#item_id').val(data.id);
                 $('#blog_title').val(data.blog_title);
@@ -298,8 +302,6 @@
                     });
                 }
 
-
-
                 $('#preview-blog_image').html(
                     `<div class="position-relative" style="display: inline-block;">
                         <img src="${data.blog_image}" style="height:50px;">
@@ -307,8 +309,11 @@
                     </div>`
                 );
 
-                CKEDITOR.instances['blog_content'].setData(data.blog_content);
-                $('#saveBtn').html('Save Changes');
+                if (typeof CKEDITOR !== 'undefined' && CKEDITOR.instances && CKEDITOR.instances['blog_content']) {
+                    CKEDITOR.instances['blog_content'].setData(data.blog_content || '');
+                } else {
+                    $('#blog_content').val(data.blog_content || '');
+                }
             })
         });
 
@@ -319,16 +324,20 @@
         --------------------------------------------*/
         $('#saveBtn').click(function (e) {
             e.preventDefault();
-            $(this).html('Sending..');
             
-            if (CKEDITOR.instances['blog_content']) {
+            var blog_content = '';
+            if (typeof CKEDITOR !== 'undefined' && CKEDITOR.instances && CKEDITOR.instances['blog_content']) {
                 CKEDITOR.instances['blog_content'].updateElement();
+                blog_content = CKEDITOR.instances['blog_content'].getData();
+            } else {
+                blog_content = $('#blog_content').val() || '';
             }
 
-            var blog_content = CKEDITOR.instances['blog_content'] ? CKEDITOR.instances['blog_content'].getData() : '';
+            var saveBtn = $(this);
+            saveBtn.html('Sending..').prop('disabled', true);
             
             var formdata = new FormData(document.getElementById('packageForm'));
-            formdata.append('blog_content', blog_content);
+            formdata.set('blog_content', blog_content);
             
             // Gather FAQs
             var faqs = [];
@@ -358,22 +367,36 @@
                 processData: false,
                 contentType: false,
                 success: function (data) {
+                    saveBtn.html('Save Changes').prop('disabled', false);
                     $('#packageForm').trigger("reset");
                     $('#ajaxModel').modal('hide');
                     table.draw();
-                    toastr.options.timeOut = 5000;
-                    toastr.success(data.success);
+                    if (typeof toastr !== 'undefined') {
+                        toastr.options.timeOut = 5000;
+                        toastr.success(data.success);
+                    } else {
+                        alert(data.success || 'Saved successfully');
+                    }
                 },
                 error: function (response) {
-                    if (response.status === 422) {
+                    saveBtn.html('Save Changes').prop('disabled', false);
+                    if (response.status === 422 && response.responseJSON && response.responseJSON.errors) {
                         var errors = response.responseJSON.errors;
                         $.each(errors, function (field_name, error) {
-                            toastr.error(error[0]);
+                            if (typeof toastr !== 'undefined') {
+                                toastr.error(error[0]);
+                            } else {
+                                alert(error[0]);
+                            }
                         });
                     } else {
-                        toastr.error('An error occurred. Please try again.');
+                        var msg = (response.responseJSON && response.responseJSON.message) ? response.responseJSON.message : 'An error occurred. Please try again.';
+                        if (typeof toastr !== 'undefined') {
+                            toastr.error(msg);
+                        } else {
+                            alert(msg);
+                        }
                     }
-                    $('#saveBtn').html('Save Changes');
                 }
             });
         });

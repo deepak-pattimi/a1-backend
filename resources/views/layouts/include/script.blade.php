@@ -6,6 +6,7 @@
 <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
 <script src="{{ asset('plugins/lazy/jquery.lazy.min.js') }}"></script>
 <script src="https://cdn.ckeditor.com/4.22.1/full/ckeditor.js"></script>
+<script>window.CKEDITOR || document.write('<script src="{{ asset("plugins/ckeditor/ckeditor.js") }}"><\/script>')</script>
 
 <!-- DataTables JS -->
 <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>

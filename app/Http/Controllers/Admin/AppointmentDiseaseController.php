@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class AppointmentDiseaseController extends Controller
 {
@@ -29,6 +30,8 @@ class AppointmentDiseaseController extends Controller
             'status' => $request->has('status') ? 1 : 0
         ]);
 
+        Cache::forget('client_appointment_diseases');
+
         return redirect()->route('appointment-diseases.index')->with('success', 'Appointment Disease added successfully');
     }
 
@@ -50,6 +53,8 @@ class AppointmentDiseaseController extends Controller
             'status' => $request->has('status') ? 1 : 0
         ]);
 
+        Cache::forget('client_appointment_diseases');
+
         return redirect()->route('appointment-diseases.index')->with('success', 'Appointment Disease updated successfully');
     }
 
@@ -57,6 +62,8 @@ class AppointmentDiseaseController extends Controller
     {
         $disease = \App\Models\AppointmentDisease::findOrFail($id);
         $disease->delete();
+
+        Cache::forget('client_appointment_diseases');
 
         return redirect()->route('appointment-diseases.index')->with('success', 'Appointment Disease deleted successfully');
     }

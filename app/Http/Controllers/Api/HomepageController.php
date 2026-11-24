@@ -309,7 +309,7 @@ class HomepageController extends Controller
     // get blogs list api (optimized: selects lightweight list columns to avoid megabytes of blog article text in listings)
     public function getBlogs(Request $request)
     {
-        $query = Blog::select('id', 'slug', 'blog_title', 'blog_image', 'category', 'read_time', 'views', 'likes', 'created_at', 'status')
+        $query = Blog::select('id', 'slug', 'blog_title', 'blog_image', 'category', 'read_time', 'views', 'likes', 'created_at', 'status', 'blog_category_id')
             ->with(['blogCategory' => function ($q) {
                 $q->select('id', 'name', 'slug');
             }])
@@ -329,7 +329,7 @@ class HomepageController extends Controller
 
         // Get structured categories with lightweight blog cards
         $groupedCategories = \App\Models\BlogCategory::with(['blogs' => function ($q) use ($request) {
-            $q->select('id', 'slug', 'blog_title', 'blog_image', 'category', 'read_time', 'views', 'likes', 'created_at', 'status')
+            $q->select('id', 'slug', 'blog_title', 'blog_image', 'category', 'read_time', 'views', 'likes', 'created_at', 'status', 'blog_category_id')
               ->where('status', 1)
               ->latest();
             if ($request->search) {
