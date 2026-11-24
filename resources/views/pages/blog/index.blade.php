@@ -126,6 +126,22 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label for="meta_title" class="col-sm-6 control-label">Meta Title</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="meta_title" name="meta_title"
+                                    placeholder="Enter Meta Title (Optional)">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="meta_description" class="col-sm-6 control-label">Meta Description</label>
+                            <div class="col-sm-12">
+                                <textarea class="form-control" id="meta_description" name="meta_description" rows="3"
+                                    placeholder="Enter Meta Description (Optional)"></textarea>
+                            </div>
+                        </div>
+
 
 
                         <x-image-input name="blog_image" columns="col-md-12" value="{{ old('blog_image') }}" id="blog_image" label="Banner image" />
@@ -253,6 +269,8 @@
             $('#saveBtn').val("create-product");
             $('#saveBtn').html('Save Changes').prop('disabled', false);
             $('#item_id').val('');
+            $('#meta_title').val('');
+            $('#meta_description').val('');
             $('#modelHeading').html("Create new blog");
             $('#ajaxModel').modal('show');
             $('#faqs-container').empty();
@@ -282,6 +300,8 @@
                 $('#item_id').val(data.id);
                 $('#blog_title').val(data.blog_title);
                 $('#blog_category_id').val(data.blog_category_id);
+                $('#meta_title').val(data.meta_title || '');
+                $('#meta_description').val(data.meta_description || '');
                 $('#category').val(data.category);
                 $('#tags').val(data.tags);
                 $('#read_time').val(data.read_time);
