@@ -17,11 +17,6 @@
     <div class="page-header">
         <div class="row align-items-end">
             <div class="col-lg-8">
-                <div class="page-header-title">
-                    <div class="d-inline">
-                        <h5>Blogs List</h5>
-                    </div>
-                </div>
             </div>
             <div class="col-lg-4">
                 <nav class="breadcrumb-container" aria-label="breadcrumb">
@@ -29,13 +24,11 @@
                         <li class="breadcrumb-item">
                             <a href="{{url('/')}}"><i class="ik ik-home"></i></a>
                         </li>
-                        <li class="breadcrumb-item">
-                            <a href="#">Blogs List</a>
-                        </li>
                     </ol>
                 </nav>
             </div>
         </div>
+    </div>
     <div class="row mb-5">
         <div class="col-md-12">
             <h4 class="mb-3">Blog Categories</h4>
